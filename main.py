@@ -9,17 +9,26 @@ the_jinja_env = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-
-
-
-
-
-
-
-
-
-
-
+class HomeHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(welcome_template.render(meme_data))
+    def post(self):
+        self.response.write(welcome_template.render(meme_data))
+class ScheduleHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(welcome_template.render(meme_data))
+    def post(self):
+        self.response.write(welcome_template.render(meme_data))
+class NewEventHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(welcome_template.render(meme_data))
+    def post(self):
+        self.response.write(welcome_template.render(meme_data))
+class ConnectionsHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(welcome_template.render(meme_data))
+    def post(self):
+        self.response.write(welcome_template.render(meme_data))
 
 
 app = webapp2.WSGIApplication([
