@@ -1,0 +1,21 @@
+
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /static #Every handler has a matching start url
+  static_dir: static #doesnt have to be 'static', just the name of our static dir
+
+# - url: /images #Can get every image
+#   static_dir: my_images
+
+
+- url: /.* #Matches everything, so nothing can go below it
+  script: main.app
+
+libraries:
+- name: jinja2
+  version: latest
+- name: webapp2
+  version: latest
