@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="static/css/index.css">
+<body>
+
+
+
+<div >
+  <div >
+    <h1>My calendar</h1>
+  </div>
+</div>
+
+<div>
+  <button class="w3-button w3-teal w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button>
+
+  <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="rightMenu">
+    <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+    <a href="#" class="sidebarbutton">friend[0]</a>
+    <a href="#" class="sidebarbutton">friend[1]</a>
+    <a href="#" class="sidebarbutton">friend[2]</a>
+  </div>
+</div>
+
+<script>
+
+function openRightMenu() {
+  document.getElementById("rightMenu").style.display = "block";
+}
+
+function closeRightMenu() {
+  document.getElementById("rightMenu").style.display = "none";
+}
+</script>
+
+</body>
+</html>
