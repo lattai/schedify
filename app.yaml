@@ -4,14 +4,14 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /static #Every handler has a matching start url
-  static_dir: static #doesnt have to be 'static', just the name of our static dir
+- url: /static 
+  static_dir: static 
 
 # - url: /images #Can get every image
 #   static_dir: my_images
 
 
-- url: /.* #Matches everything, so nothing can go below it
+- url: /.*
   script: main.app
 
 libraries:
