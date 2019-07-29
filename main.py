@@ -56,6 +56,7 @@ class LandingHandler(webapp2.RequestHandler):
         first_name=self.request.get('first_name'),
         last_name=self.request.get('last_name'),
         email=user.nickname())
+        #email=self.request.get('email')) because i want to parse their email to get their cal
     schedify_user.put()
     home_template = the_jinja_env.get_template('templates/home.html')
     self.response.write('ENTER HOME PAGE TEMPLATE HERE! <br>Thanks for signing up, %s! <br><a href="/">Home</a>' %
