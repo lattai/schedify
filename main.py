@@ -57,9 +57,13 @@ class LandingHandler(webapp2.RequestHandler):
         last_name=self.request.get('last_name'),
         email=user.nickname())
     schedify_user.put()
-    self.response.write('ENTER HOME PAGE TEMPLATE HERE! <br>Thanks for signing up, %s! <br><a href="/">Home</a>' %
-        schedify_user.first_name)
-        
+    home_template = the_jinja_env.get_template('templates/home.html')
+    self.response.write(landing_template.render(landing_data))
+class HomeHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write(welcome_template.render(meme_data))
+    def post(self):
+        self.response.write(welcome_template.render(meme_data))
 class ScheduleHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(welcome_template.render(meme_data))
@@ -79,6 +83,7 @@ class ConnectionsHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', LandingHandler),
+    ('/home',HomeHandler),
     ('/schedule', ScheduleHandler),
     ('/new_event', NewEventHandler),
     ('/connections', ConnectionsHandler)
