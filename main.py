@@ -59,7 +59,7 @@ class LandingHandler(webapp2.RequestHandler):
     schedify_user.put()
     self.response.write('ENTER HOME PAGE TEMPLATE HERE! <br>Thanks for signing up, %s! <br><a href="/">Home</a>' %
         schedify_user.first_name)
-
+        
 class ScheduleHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(welcome_template.render(meme_data))
