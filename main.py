@@ -2,7 +2,7 @@ import webapp2
 import os
 import jinja2
 from google.appengine.api import users
-from models import SchedifyUser
+from models import SchedifyUser, Event, Attendence
 
 the_jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -65,11 +65,38 @@ class ScheduleHandler(webapp2.RequestHandler):
         self.response.write(welcome_template.render(meme_data))
     def post(self):
         self.response.write(welcome_template.render(meme_data))
+
+class EventHandler(webapp2.RequestHandler):
+    def get(self):
+        event_template = the_jinja_env.get_template('templates/event.html')
+        events = Event.query().fetch()
+        event_data = {
+            "newevent_url": /new_event,
+            "event_info": events
+        }
+        elf.response.write(event_template.render(event_data))
+
 class NewEventHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write(welcome_template.render(meme_data))
+        event_template = the_jinja_env.get_template('templates/newevent.html')
+        self.response.write(event_template.render({'': events}))
     def post(self):
+        # create new event?
+        # look at the sign in if statement
+        # grab the email adress through google users api then search
+        #   for schedify through that email address
+        event_template = the_jinja_env.get_template('templates/newevent.html')
+        schedify_event = Event(
+            title = self.request.get('event_title'),
+            summary = self.request.get('event_summary'),
+        )
+        schedify_event.put()
+        schedify_attendance = Attendance (
+            # user = enter user instance,
+            event = schedify_event,
+        )
         self.response.write(welcome_template.render(meme_data))
+
 class ConnectionsHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(welcome_template.render(meme_data))
@@ -80,6 +107,7 @@ class ConnectionsHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', LandingHandler),
     ('/schedule', ScheduleHandler),
+    ('/event', EventHandler),
     ('/new_event', NewEventHandler),
     ('/connections', ConnectionsHandler)
 
