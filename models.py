@@ -1,6 +1,4 @@
 
-import webapp2
-from google.appengine.api import users
 from google.appengine.ext import ndb
 
 class SchedifyUser(ndb.Model):
@@ -21,4 +19,4 @@ class Graph(ndb.Model):
     # if you call a dictionary of sets,
 
     # maybe make a function where you create a set and
-    # return a set
+    # return a
