@@ -1,13 +1,23 @@
 #event-div{
  width: 450px;
- height: 300px;
+ height: 50px;
  background-size: 100%;
  position: relative;
  max-width: 500px;
  margin: auto;
  }
+
+ #eventlist{
+  /* width: 450px;
+  height: 300px;
+  background-size: 100%;
+  position: relative; */
+  max-width: 500px;
+  margin: auto;
+  }
+
   h1 {
-   font-family: impact;
+   font-family: monaco;
    color: white;
    text-shadow: 2px 2px black;
    text-align: center;
