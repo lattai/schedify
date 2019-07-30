@@ -14,13 +14,30 @@
 </div>
 
 <div>
-  <button class="w3-button w3-teal w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button>
+  <button class="rMenuButton" onclick="openRightMenu()">&#9776;</button>
 
-  <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="rightMenu">
-    <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+  <div class="rMenuButtonOpened" style="display:none;right:0;" id="rightMenu">
+    <button onclick="closeRightMenu()" class="rMenuButtonClose">Close &times;</button>
     <a href="#" class="sidebarbutton">friend[0]</a>
     <a href="#" class="sidebarbutton">friend[1]</a>
     <a href="#" class="sidebarbutton">friend[2]</a>
+  </div>
+  <div class="yourSchedule">
+    <h1>Your Schedule</h1>
+
+    <iframe src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+    <!-- To do on main:
+            Parse email
+            Get friend emails
+            Parse emails
+            -->
+  </div>
+  <div class="compare">
+    <iframe src="https://calendar.google.com/calendar/embed?height=284&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;src=c2NoZWRpZnl0ZWFtQGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;mode=WEEK" style="border-width:0" width="1014" height="284" frameborder="0" scrolling="no"></iframe>
+    <!-- your schedule ^^^ -->
+    <iframe src="https://calendar.google.com/calendar/embed?height=284&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;src=c2NoZWRpZnl0ZWFtQGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;mode=WEEK" style="border-width:0" width="1014" height="284" frameborder="0" scrolling="no"></iframe>
+    <!-- Friend's Schedule ^^^ -->
   </div>
 </div>
 
