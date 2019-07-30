@@ -2,11 +2,27 @@
 <html>
   <head>
     <title>Schedify</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="static/css/home.css">
   </head>
   <body>
     <!-- Nav bar -->
-    <div class="topnav">
+
+  <header>
+    <div class="container">
+      <h5 class="logo">Schedify</h5>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/event-feed">Events</a></li>
+          <li><a href="/connections">Connections</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="{{sign_out}}">Sign Out</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+    <!-- <div class="topnav">
       <a class="active" href="/">Home</a>
       <a href="/event-feed">Events</a>
       <a href="/connections">Connections</a>
@@ -15,12 +31,12 @@
       <!-- temporary anchor user to sign output
         in the future, user will sign out by going through their
         profile -->
-      <a href="{{sign_out}}">X</a>
-    </div>
+
+    <!-- </div> -->
 
 
-    <h1>Your Schedule</h1>
-
+    <h1 id="your_schedule">Your Schedule</h1>
+<div id="calendar-div">
     <iframe src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
       <!-- Embedded Calendar: Currently works for any logged in user -->
     <h1>Friends Schedules</h1>
@@ -29,5 +45,6 @@
     <h1>Events Happening</h1>
     <h3>events here</h3>
   <script type="text/javascript" src="script.js"></script>
+  </div>
   </body>
 </html>
