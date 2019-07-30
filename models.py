@@ -6,8 +6,16 @@ class SchedifyUser(ndb.Model):
     first_name = ndb.StringProperty()
     last_name = ndb.StringProperty()
     email = ndb.StringProperty()
+    friends = ndb.KeyProperty("SchedifyUser", repeated=True)
+
+    # is this needed? I have not used this yet
+    def own_key(self):
+        user_key = ndb.KeyProperty("SchedifyUser")
+        return user_key
+
 
 # not implemented yet
+# do not even need
 class Connect(ndb.Model):
     user_one = ndb.KeyProperty(SchedifyUser)
     user_two = ndb.KeyProperty(SchedifyUser)
@@ -16,7 +24,7 @@ class Connect(ndb.Model):
     # if you can then appengine will store a list/dict (check)
     #   of sets (of user keys)
     # this will make graph ultimately a set of two user keys.
-    connections = {user_one, user_two}
+
     # dict that holds several connections
     # if you call a dictionary of sets,
 
@@ -24,9 +32,12 @@ class Connect(ndb.Model):
     # return a set
 
 class Event(ndb.Model):
+    owner = ndb.KeyProperty(SchedifyUser)
     title = ndb.StringProperty()
     summary = ndb.StringProperty()
 
+
+# do not even need
 class Attendance(ndb.Model):
     user = ndb.KeyProperty(SchedifyUser)
     event = ndb.KeyProperty(Event)
