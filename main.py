@@ -95,7 +95,7 @@ class ScheduleHandler(webapp2.RequestHandler):
         welcome_data = {
             "emailStart": email_start
         }
-        self.response.write(welcome_template.render())
+        self.response.write(welcome_template.render(welcome_data))
     def post(self):
         welcome_template = the_jinja_env.get_template('templates/schedule.html')
         welcome_data = {
