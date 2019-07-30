@@ -1,10 +1,11 @@
+
 from google.appengine.ext import ndb
 
 # Change to user
 class SchedifyUser(ndb.Model):
-  first_name = ndb.StringProperty()
-  last_name = ndb.StringProperty()
-  email = ndb.StringProperty()
+    first_name = ndb.StringProperty()
+    last_name = ndb.StringProperty()
+    email = ndb.StringProperty()
 
 # not implemented yet
 class Graph(ndb.Model):
