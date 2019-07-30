@@ -88,9 +88,12 @@ class LandingHandler(webapp2.RequestHandler):
 class ScheduleHandler(webapp2.RequestHandler):
     def get(self):
         welcome_template = the_jinja_env.get_template('templates/schedule.html')
+        user = users.get_current_user()
+        email_address = user.nickname()
+        email_list = email_address.split('@')
+        email_start = email_list[0]
         welcome_data = {
-            "first_name": firstname,
-            "last_name": lastname
+            "emailStart": email_start
         }
         self.response.write(welcome_template.render())
     def post(self):
