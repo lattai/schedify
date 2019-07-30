@@ -5,6 +5,7 @@ from google.appengine.ext import ndb
 class SchedifyUser(ndb.Model):
     first_name = ndb.StringProperty()
     last_name = ndb.StringProperty()
+    username = ndb.StringProperty()
     email = ndb.StringProperty()
     friends = ndb.KeyProperty("SchedifyUser", repeated=True)
 

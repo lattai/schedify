@@ -69,12 +69,14 @@ class LandingHandler(webapp2.RequestHandler):
     # Enter home page here:
     # Enter the page that the user sees after they have signed in
     user = users.get_current_user()
+    username = self.request.get('user_name')
     firstname = self.request.get('first_name')
     lastname = self.request.get('last_name')
 
     schedify_user = SchedifyUser(
         first_name = firstname,
         last_name = lastname,
+        username = username,
         email=user.nickname())
         #email=self.request.get('email')) because i want to parse their email to get their cal
     schedify_user.put()
@@ -110,6 +112,8 @@ class EventHandler(webapp2.RequestHandler):
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
 
+
+
         event_template = the_jinja_env.get_template('templates/event-feed.html')
         events = Event.query(Event.owner == schedify_user.key).fetch()
 
@@ -119,6 +123,21 @@ class EventHandler(webapp2.RequestHandler):
         }
         self.response.write(event_template.render(event_data))
 
+    def post(self):
+        user = users.get_current_user()
+        email_address = user.nickname()
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+
+
+
+        event_template = the_jinja_env.get_template('templates/event-feed.html')
+        events = Event.query(Event.owner == schedify_user.key).fetch()
+
+        event_data = {
+            # "newevent_url": new_event,
+            "event_info": events
+        }
+        self.response.write(event_template.render(event_data))
 class NewEventHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
@@ -167,11 +186,17 @@ class ConnectionsHandler(webapp2.RequestHandler):
 
 class AddConnectionHandler(webapp2.RequestHandler):
     def get(self):
-        add_connection_template = the_jinja_env.get_template('templates/add-connections.html')
-        self.response.write(add_connection_template.render())
+        add_connections_template = the_jinja_env.get_template('templates/add-connections.html')
+        self.response.write(add_connections_template.render())
     def post(self):
         add_connections_template = the_jinja_env.get_template('templates/add-connections.html')
-        self.response.write(add_connection_template.render())
+
+        username_search = self.request.get('username_search')
+        possible_usernames = SchedifyUser.query(SchedifyUser.username == username_search).fetch()
+        connections_data = {
+            "friend_list": possible_usernames
+        }
+        self.response.write(add_connections_template.render(connections_data))
 
 class ProfileHandler(webapp2.RequestHandler):
     def get(self):
