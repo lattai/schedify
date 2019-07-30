@@ -33,7 +33,7 @@ class LandingHandler(webapp2.RequestHandler):
         signout_link = users.create_logout_url('/')
 
         home_data = {
-            "email-start": email_start,
+            "emailStart": email_start,
             "sign_out": signout_link
         }
         home_template = the_jinja_env.get_template('templates/home.html')
