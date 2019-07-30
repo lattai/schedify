@@ -24,9 +24,9 @@ html {
  max-width: 500px;
  margin: auto; */
  }
-#compare_button {
-  padding-bottom: 20%;
-}
+/* #compare_button {
+  padding-top: 10%;
+} */
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
