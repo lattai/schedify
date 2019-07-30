@@ -1,7 +1,7 @@
 html {
    background-color: #e0ffe0;
    }
-#greeting {
+#profile_page {
   margin: 0;
   padding-bottom: 80px;
   padding-top: 80px;
@@ -88,41 +88,3 @@ transition: all ease-in-out 250ms;
 nav a:hover::before {
 width: 100%;
 }
-
-
-
-
-/* .topnav {
-  margin: 2%;
-  text-decoration: none;
-  font-size: 17px;
-  overflow: hidden;
-}
-
-.topnav a{
-  color: black;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav-right {
-  padding: 0% 4% 0% 4%;
-  float: right;
-  padding:
-}
-
-.topnav-right a{ */
-  /* margin-left: 1%;
-  margin-right: 1%; */
-  /* white-space: nowrap;
-}
-
-.topnav-right a:hover{
-  color: purple;
-} */
-
-/* #create-account {
-  margin-left: 2%;
-  color: blue;
-  white-space: nowrap;
-} */
