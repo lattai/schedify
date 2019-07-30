@@ -8,15 +8,15 @@
   <body>
     <div class="top-navbar">
       <!-- goes back to the event page -->
-      <a href="{{exit_out}}">X</a>
+      <a href="/event">X</a>
     </div>
     <div class="container">
       <h1>Create an Event!</h1>
-      <form method="post" action="/">
-        First Name:<br>
+      <form method="post" action="/new_event">
+        Title:<br>
         <input type="text" name="event_title">
         <br>
-        Last Name:<br>
+        Description:<br>
         <input type="text" name="event_summary">
         <br>
         <input type="submit">

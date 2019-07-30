@@ -24,19 +24,20 @@
       <input type="button" onclick="window.location.href = 'https://oval-day-247513.appspot.com/gen_a_meme';" value="Create Event"/>
     </select>
       <button type="button" name="button">
-        <a href="{{newevent_url}}">Create Event</a>
+        <a href="/new_event">Create Event</a>
       </button>
     <br>
     <br>
     <br>
 
-  {% for event in events %}
-  <div class=row>
-    <div class=img></div>
-    <div class=description></div>
-      <p> {% event.title %} </p>
-      <p> {% event.summary %} </p>
-  </div>
+  {% for event in event_info %}
+    <div class=row>
+      <div class=img></div>
+      <div class=description></div>
+        <p> {{event.title}} </p>
+        <p> {{event.summary}} </p>
+    </div>
+  {% endfor %}
   </div>
   </body>
 </html>
