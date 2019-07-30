@@ -2,7 +2,7 @@ import webapp2
 import os
 import jinja2
 from google.appengine.api import users
-from models import SchedifyUser
+from models import SchedifyUser, Connect, Event, Attendance
 
 the_jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -23,12 +23,29 @@ class LandingHandler(webapp2.RequestHandler):
         # Enter home page here:
         # Enter the page that the user sees after they have signed in
         # Greet them with their personal information
-        self.response.write('''
-            ENTER HOME PAGE TEMPLATE HERE! <br>Welcome %s %s (%s)! <br> %s <br>''' % (
-              schedify_user.first_name,
-              schedify_user.last_name,
-              email_address,
-              signout_link_html))
+
+        # Home Handler
+        user = users.get_current_user()
+        email_address = user.nickname()
+        email_list = email_address.split('@')
+        email_start = email_list[0]
+
+        signout_link = users.create_logout_url('/')
+
+        home_data = {
+            "emailStart": email_start,
+            "sign_out": signout_link
+        }
+        home_template = the_jinja_env.get_template('templates/home.html')
+        self.response.write(home_template.render(home_data))
+
+        #  Coding to know
+        # self.response.write('''
+        #     ENTER HOME PAGE TEMPLATE HERE! <br>Welcome %s %s (%s)! <br> %s <br>''' % (
+        #       schedify_user.first_name,
+        #       schedify_user.last_name,
+        #       email_address,
+        #       signout_link_html))
       # If the user isn't registered...
       else:
         # Offer a registration form for a first-time visitor:
@@ -52,50 +69,102 @@ class LandingHandler(webapp2.RequestHandler):
     # Enter home page here:
     # Enter the page that the user sees after they have signed in
     user = users.get_current_user()
+    firstname = self.request.get('first_name')
+    lastname = self.request.get('last_name')
+
     schedify_user = SchedifyUser(
-        first_name=self.request.get('first_name'),
-        last_name=self.request.get('last_name'),
+        first_name = firstname,
+        last_name = lastname,
         email=user.nickname())
         #email=self.request.get('email')) because i want to parse their email to get their cal
     schedify_user.put()
-    landing_template = the_jinja_env.get_template('templates/landing.html')
-    self.response.write('ENTER HOME PAGE TEMPLATE HERE! <br>Thanks for signing up, %s! <br><a href="/">Home</a>' %
-        schedify_user.first_name)
-class HomeHandler(webapp2.RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        email_address = user.nickname()
-        email_list = email_address.split('@')
-        email_start = email_list[0]
-        home_data = {
-        "email-start":email_start
-        }
-        home_template = the_jinja_env.get_template('templates/home.html')
-        self.response.write(home_template.render(home_data))
-    def post(self):
-        self.response.write(welcome_template.render(meme_data))
+    welcome_template = the_jinja_env.get_template('templates/welcome.html')
+    welcome_data = {
+        "first_name": firstname,
+        "last_name": lastname
+    }
+    self.response.write(welcome_template.render())
+
 class ScheduleHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write(welcome_template.render(meme_data))
+        welcome_template = the_jinja_env.get_template('templates/schedule.html')
+        welcome_data = {
+            "first_name": firstname,
+            "last_name": lastname
+        }
+        self.response.write(welcome_template.render())
     def post(self):
-        self.response.write(welcome_template.render(meme_data))
+        welcome_template = the_jinja_env.get_template('templates/schedule.html')
+        welcome_data = {
+            "first_name": firstname,
+            "last_name": lastname
+        }
+        self.response.write(welcome_template.render())
+
+class EventHandler(webapp2.RequestHandler):
+    def get(self):
+        event_template = the_jinja_env.get_template('templates/event.html')
+        events = Event.query().fetch()
+        event_data = {
+            # "newevent_url": new_event,
+            "event_info": events
+        }
+        self.response.write(event_template.render(event_data))
+
 class NewEventHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write(welcome_template.render(meme_data))
+        newevent_template = the_jinja_env.get_template('templates/newevent.html')
+        self.response.write(newevent_template.render())
     def post(self):
-        self.response.write(welcome_template.render(meme_data))
+        # create new event?
+        # look at the sign in if statement
+        # grab the email adress through google users api then search
+        #   for schedify through that email address
+        newevent_template = the_jinja_env.get_template('templates/newevent.html')
+        schedify_event = Event(
+            title = self.request.get('event_title'),
+            summary = self.request.get('event_summary'),
+        )
+        schedify_event.put()
+        # Add later when you add the home page html and link it to this page
+        #       You need to make sure you can call a user that is loged in
+        # schedify_attendance = Attendance (
+        #     # user = enter user instance,
+        #     event = schedify_event,
+        # )
+        self.response.write(newevent_template.render())
+
 class ConnectionsHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write(welcome_template.render(meme_data))
+        connections_template = the_jinja_env.get_template('templates/connections.html')
+        self.response.write(connections_template.render())
+    def post(self):
+        self.response.write(connections_template.render(meme_data))
+
+class AddConnectionHandler(webapp2.RequestHandler):
+    def get(self):
+        add_connection_template = the_jinja_env.get_template('templates/add-connections.html')
+        self.response.write(add_connection_template.render())
+    def post(self):
+        add_connections_template = the_jinja_env.get_template('templates/add-connections.html')
+        self.response.write(add_connection_template.render())
+
+class ProfileHandler(webapp2.RequestHandler):
+    def get(self):
+        profile_template = the_jinja_env.get_template('templates/profile.html')
+        self.response.write(profile_template.render())
     def post(self):
         self.response.write(welcome_template.render(meme_data))
 
 
 app = webapp2.WSGIApplication([
     ('/', LandingHandler),
-    ('/home',HomeHandler),
+    # schedule page should be connected to home page
     ('/schedule', ScheduleHandler),
+    ('/event', EventHandler),
     ('/new_event', NewEventHandler),
-    ('/connections', ConnectionsHandler)
+    ('/connections', ConnectionsHandler),
+    ('/add_connection', AddConnectionHandler),
+    ('/profile', ProfileHandler)
 
 ], debug=True)
