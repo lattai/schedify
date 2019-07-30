@@ -33,7 +33,7 @@ class LandingHandler(webapp2.RequestHandler):
         signout_link = users.create_logout_url('/')
 
         home_data = {
-            "email-start": email_start,
+            "emailStart": email_start,
             "sign_out": signout_link
         }
         home_template = the_jinja_env.get_template('templates/home.html')
@@ -87,9 +87,19 @@ class LandingHandler(webapp2.RequestHandler):
 
 class ScheduleHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write(welcome_template.render(meme_data))
+        welcome_template = the_jinja_env.get_template('templates/schedule.html')
+        welcome_data = {
+            "first_name": firstname,
+            "last_name": lastname
+        }
+        self.response.write(welcome_template.render())
     def post(self):
-        self.response.write(welcome_template.render(meme_data))
+        welcome_template = the_jinja_env.get_template('templates/schedule.html')
+        welcome_data = {
+            "first_name": firstname,
+            "last_name": lastname
+        }
+        self.response.write(welcome_template.render())
 
 class EventHandler(webapp2.RequestHandler):
     def get(self):
