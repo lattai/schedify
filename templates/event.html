@@ -8,11 +8,12 @@
 
 
   <body>
+    <!-- Nav bar -->
     <div class="topnav">
-      <a class="active" href="#home">Home</a>
-      <a href="#events">Events</a>
-      <a href="#your_schedule">Your Schedule</a>
-      <a href="#profile">Profile</a>
+      <a class="active" href="/">Home</a>
+      <a href="/event">Events</a>
+      <a href="/connections">Connections</a>
+      <a href="/profile">Profile</a>
     </div>
 
     <h1>Events</h1>
@@ -21,11 +22,11 @@
      <select name="event-type">
       <option value="all">All Events</option>
       <option value="friend-events">Friend Events</option>
+      <input type="button" onclick="window.location.href = 'https://oval-day-247513.appspot.com/gen_a_meme';" value="Create Event"/>
     </select>
       <button type="button" name="button">
         <a href="/new_event">Create Event</a>
       </button>
-<<<<<<< HEAD
     <br>
     <br>
     <br>
@@ -39,17 +40,5 @@
     </div>
   {% endfor %}
   </div>
-=======
-    </div>
-    <div id="eventlist">
-      {% for event in events %}
-        <div class=row>
-        <div class=img></div>
-        <div class=description></div>
-          <p> {% event.title %} </p>
-          <p> {% event.summary %} </p>
-    </div>
-<!-- </div> -->
->>>>>>> 50f29c8f1566c552f01051816a9f8eb89fa5fd3c
   </body>
 </html>

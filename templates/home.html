@@ -5,6 +5,20 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <!-- Nav bar -->
+    <div class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="/event">Events</a>
+      <a href="/connections">Connections</a>
+      <a href="#profile">Profile</a>
+
+      <!-- temporary anchor user to sign output
+        in the future, user will sign out by going through their
+        profile -->
+      <a href="{{sign_out}}">X</a>
+    </div>
+
+
     <h1>Your Schedule</h1>
     <iframe src="https://calendar.google.com/calendar/embed?src=+SchedifyTeam%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
       <!-- Embedded Calendar: Currently hardcoded for user 'SchedifyTeam'-->

@@ -1,12 +1,38 @@
 <!--welcome.html-->
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Connections</title>
+    <title></title>
     <link rel="stylesheet" type="text/css" href="../static/css/connections.css">
   </head>
-    <form method="post" action="/memeresult">
-    </form>
+  <body>
+    <!-- for now it presents all friends -->
+    <!-- Nav bar -->
+    <div class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="/event">Events</a>
+      <a href="/connections">Connections</a>
+      <a href="/profile">Profile</a>
+    </div>
+
+    <h1>Connections</h1>
+    <!-- <h2>Your Go-to Platform for Memes!</h2> -->
+   <div id="connections-div">
+        <a href="/add_connection">Make a connection</a>
+      </button>
+    <br>
+    <br>
+    <br>
+
+  {% for event in event_info %}
+    <div class=row>
+      <div class=img></div>
+      <div class=description></div>
+        <p> {{event.title}} </p>
+        <p> {{event.summary}} </p>
+    </div>
+  {% endfor %}
+  </div>
   </body>
 </html>

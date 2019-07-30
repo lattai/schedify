@@ -8,7 +8,7 @@ class SchedifyUser(ndb.Model):
     email = ndb.StringProperty()
 
 # not implemented yet
-class Graph(ndb.Model):
+class Connect(ndb.Model):
     user_one = ndb.KeyProperty(SchedifyUser)
     user_two = ndb.KeyProperty(SchedifyUser)
     # set that holds the key for both users

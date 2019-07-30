@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Make a Connection!</title>
+    <link rel="stylesheet" href="../static/css/newevent.css">
+  </head>
+  <body>
+    <div class="top-navbar">
+      <!-- goes back to the event page -->
+      <a href="/connections">X</a>
+    </div>
+    <div class="container">
+      <h1>Make a connection!</h1>
+      <form method="post" action="/new_event">
+        Title:<br>
+        <input type="text" name="event_title">
+        <br>
+        Description:<br>
+        <input type="text" name="event_summary">
+        <br>
+        <input type="submit">
+        <br>
+      </form>
+    </div>
+  </body>
+</html>

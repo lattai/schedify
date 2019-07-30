@@ -2,7 +2,7 @@ import webapp2
 import os
 import jinja2
 from google.appengine.api import users
-from models import SchedifyUser, Event, Attendance
+from models import SchedifyUser, Connect, Event, Attendance
 
 the_jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -29,8 +29,12 @@ class LandingHandler(webapp2.RequestHandler):
         email_address = user.nickname()
         email_list = email_address.split('@')
         email_start = email_list[0]
+
+        signout_link = users.create_logout_url('/')
+
         home_data = {
-        "email-start":email_start
+            "email-start": email_start,
+            "sign_out": signout_link
         }
         home_template = the_jinja_env.get_template('templates/home.html')
         self.response.write(home_template.render(home_data))
@@ -65,28 +69,22 @@ class LandingHandler(webapp2.RequestHandler):
     # Enter home page here:
     # Enter the page that the user sees after they have signed in
     user = users.get_current_user()
+    firstname = self.request.get('first_name')
+    lastname = self.request.get('last_name')
+
     schedify_user = SchedifyUser(
-        first_name=self.request.get('first_name'),
-        last_name=self.request.get('last_name'),
+        first_name = firstname,
+        last_name = lastname,
         email=user.nickname())
         #email=self.request.get('email')) because i want to parse their email to get their cal
     schedify_user.put()
-    landing_template = the_jinja_env.get_template('templates/landing.html')
-    self.response.write('ENTER HOME PAGE TEMPLATE HERE! <br>Thanks for signing up, %s! <br><a href="/">Home</a>' %
-        schedify_user.first_name)
-class HomeHandler(webapp2.RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        email_address = user.nickname()
-        email_list = email_address.split('@')
-        email_start = email_list[0]
-        home_data = {
-        "email-start":email_start
-        }
-        home_template = the_jinja_env.get_template('templates/home.html')
-        self.response.write(home_template.render(home_data))
-    def post(self):
-        self.response.write(welcome_template.render(meme_data))
+    welcome_template = the_jinja_env.get_template('templates/welcome.html')
+    welcome_data = {
+        "first_name": firstname,
+        "last_name": lastname
+    }
+    self.response.write(welcome_template.render())
+
 class ScheduleHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(welcome_template.render(meme_data))
@@ -128,17 +126,35 @@ class NewEventHandler(webapp2.RequestHandler):
 
 class ConnectionsHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write(welcome_template.render(meme_data))
+        connections_template = the_jinja_env.get_template('templates/connections.html')
+        self.response.write(connections_template.render())
+    def post(self):
+        self.response.write(connections_template.render(meme_data))
+
+class AddConnectionHandler(webapp2.RequestHandler):
+    def get(self):
+        add_connection_template = the_jinja_env.get_template('templates/add-connections.html')
+        self.response.write(add_connection_template.render())
+    def post(self):
+        add_connections_template = the_jinja_env.get_template('templates/add-connections.html')
+        self.response.write(add_connection_template.render())
+
+class ProfileHandler(webapp2.RequestHandler):
+    def get(self):
+        profile_template = the_jinja_env.get_template('templates/profile.html')
+        self.response.write(profile_template.render())
     def post(self):
         self.response.write(welcome_template.render(meme_data))
 
 
 app = webapp2.WSGIApplication([
     ('/', LandingHandler),
-    ('/home',HomeHandler),
+    # schedule page should be connected to home page
     ('/schedule', ScheduleHandler),
     ('/event', EventHandler),
     ('/new_event', NewEventHandler),
-    ('/connections', ConnectionsHandler)
+    ('/connections', ConnectionsHandler),
+    ('/add_connection', AddConnectionHandler),
+    ('/profile', ProfileHandler)
 
 ], debug=True)
