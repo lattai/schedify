@@ -58,18 +58,20 @@ class LandingHandler(webapp2.RequestHandler):
         email=user.nickname())
         #email=self.request.get('email')) because i want to parse their email to get their cal
     schedify_user.put()
-    home_template = the_jinja_env.get_template('templates/landing.html')
+    landing_template = the_jinja_env.get_template('templates/landing.html')
     self.response.write('ENTER HOME PAGE TEMPLATE HERE! <br>Thanks for signing up, %s! <br><a href="/">Home</a>' %
         schedify_user.first_name)
-    # home_template = the_jinja_env.get_template('templates/home.html')
-    # self.response.write(home_template.render(landing_data))
-class HomeHandler(webapp2.RequestHandler):
-    def get(self):
-
-        home_template = the_jinja_env.get_template('templates/home.html')
-        self.response.write(home_template.render())
-    def post(self):
-        self.response.write(welcome_template.render(meme_data))
+# class HomeHandler(webapp2.RequestHandler):
+#     def get(self):
+#         user = users.get_current_user()
+#         email_address = user.nickname()
+#         email_list = email_address.split(@)
+#         email_start = email_list[0]
+#         home_data
+#         home_template = the_jinja_env.get_template('templates/home.html')
+#         self.response.write(home_template.render())
+#     def post(self):
+#         self.response.write(welcome_template.render(meme_data))
 class ScheduleHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(welcome_template.render(meme_data))
