@@ -111,7 +111,6 @@ class EventHandler(webapp2.RequestHandler):
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
 
         event_template = the_jinja_env.get_template('templates/event-feed.html')
-        # events = Event.query().filter(Event.owner == schedify_user.own_key()).fetch()
         events = Event.query(Event.owner == schedify_user.key).fetch()
 
         event_data = {
@@ -186,7 +185,7 @@ app = webapp2.WSGIApplication([
     ('/', LandingHandler),
     # schedule page should be connected to home page
     ('/schedule', ScheduleHandler),
-    ('/event', EventHandler),
+    ('/event-feed', EventHandler),
     ('/new_event', NewEventHandler),
     ('/connections', ConnectionsHandler),
     ('/add_connection', AddConnectionHandler),

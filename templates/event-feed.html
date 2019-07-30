@@ -2,22 +2,37 @@
 <html lang="en" dir="ltr">
   <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="../static/css/event-feed.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/event-feed.css">
   </head>
     <title>Events</title>
 
 
   <body>
     <!-- Nav bar -->
-    <div class="topnav">
+    <header>
+    <div class="container">
+      <h5 class="logo">Schedify</h5>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/event-feed">Events</a></li>
+          <li><a href="/connections">Connections</a></li>
+          <li><a href="/profile">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+    <!-- <div class="topnav">
       <a class="active" href="/">Home</a>
-      <a href="/event">Events</a>
+      <a href="/event-feed">Events</a>
       <a href="/connections">Connections</a>
       <a href="/profile">Profile</a>
-    </div>
+    </div> -->
 
-    <h1>Events</h1>
+    <h1 id="events_header">Events</h1>
     <!-- <h2>Your Go-to Platform for Memes!</h2> -->
+
+<div id="body_div">
    <div id="event-div">
      <select name="event-type">
       <option value="all">All Events</option>
@@ -39,5 +54,6 @@
     </div>
   {% endfor %}
   </div>
+</div>
   </body>
 </html>
