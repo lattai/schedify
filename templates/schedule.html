@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS</title>
+<title>Your Schedule</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="static/css/index.css">
 <body>
@@ -18,25 +18,29 @@
 
   <div class="rMenuButtonOpened" style="display:none;right:0;" id="rightMenu">
     <button onclick="closeRightMenu()" class="rMenuButtonClose">Close &times;</button>
-    <a href="#" class="sidebarbutton">friend[0]</a>
-    <a href="#" class="sidebarbutton">friend[1]</a>
-    <a href="#" class="sidebarbutton">friend[2]</a>
+    <a id= "compare1" href="#1" class="sidebarbutton">friend[0]</a>
+    <a href="#2" class="sidebarbutton">friend[1]</a>
+    <a href="#3" class="sidebarbutton">friend[2]</a>
   </div>
   <div class="yourSchedule">
     <h1>Your Schedule</h1>
 
-    <iframe src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    <iframe id="your-month"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="1014" height="600" frameborder="0" scrolling="no"></iframe>
 
     <!-- To do on main:
             Parse email
             Get friend emails
             Parse emails
+            rename variables goofus
             -->
   </div>
   <div class="compare">
-    <iframe src="https://calendar.google.com/calendar/embed?height=284&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;src=c2NoZWRpZnl0ZWFtQGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;mode=WEEK" style="border-width:0" width="1014" height="284" frameborder="0" scrolling="no"></iframe>
+    <iframe id="your-week" src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK" &amp;bgcolor=%23e0ffe0 style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
     <!-- your schedule ^^^ -->
-    <iframe src="https://calendar.google.com/calendar/embed?height=284&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;src=c2NoZWRpZnl0ZWFtQGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;mode=WEEK" style="border-width:0" width="1014" height="284" frameborder="0" scrolling="no"></iframe>
+
+    <br><br><br>
+    <iframe id="friends-week"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
+
     <!-- Friend's Schedule ^^^ -->
   </div>
 </div>
@@ -52,5 +56,6 @@ function closeRightMenu() {
 }
 </script>
 
+  <script src="script.js" type="text/javascript"></script>
 </body>
 </html>
