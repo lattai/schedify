@@ -16,13 +16,21 @@
   margin: auto;
   }
 
-  h1 {
+  #events_header {
+   margin: 0;
+   padding-bottom: 80px;
+   padding-top: 80px;
+   background: #222;
    font-family: monaco;
    color: white;
    text-shadow: 2px 2px black;
    text-align: center;
-   font-size: 70px;
+   font-size: 50px;
   }
+
+#body_div {
+
+}
  #line1 {
     top: 0;
   }
@@ -46,7 +54,7 @@
   @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
 	margin: 0;
-	background: #222;
+	/* background: #222; */
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 800;
 }
