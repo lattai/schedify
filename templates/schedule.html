@@ -21,7 +21,7 @@
 
   <div class="rMenuButtonOpened" style="display:none;right:0;" id="rightMenu">
     <button onclick="closeRightMenu()" class="rMenuButtonClose">Close &times;</button>
-    <a id ="resetScheduleView"href="#" class="sidebarbutton">Your Month</a>
+    <a id ="resetScheduleView"href="" class="sidebarbutton">Your Month</a>
     <a id= "compare1" href="#1" class="sidebarbutton">friend[0]</a>
     <a id= "compare2"href="#2" class="sidebarbutton">friend[1]</a>
     <a id= "compare3"href="#3" class="sidebarbutton">friend[2]</a>
@@ -29,21 +29,15 @@
   <div class="yourSchedule">
     <h1>Your Schedule</h1>
 
-    <iframe id="your-month"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York" style="border: 0" width="1014" height="600" frameborder="0" scrolling="no"></iframe>
+    <iframe id="your-month"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="600" frameborder="0" scrolling="no"></iframe>
 
-    <!-- To do on main:
-            Parse email
-            Get friend emails
-            Parse emails
-            rename variables goofus
-            -->
   </div>
   <div class="compare">
-    <iframe id="your-week" src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK" &amp;bgcolor=%23e0ffe0 style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
+    <iframe id="your-week" src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
     <!-- your schedule ^^^ -->
 
     <br><br><br>
-    <iframe id="friends-week"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
+    <iframe id="their-week"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
 
     <!-- Friend's Schedule ^^^ -->
   </div>
