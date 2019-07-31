@@ -1,5 +1,5 @@
 html {
-   background-color: #e0ffe0;
+   background-color: #c0ffba;
    }
 #user-name {
   font-family: monaco;
@@ -16,6 +16,88 @@ html {
   font-size: 40px;
 }
 #welcome_text {
-  padding-top: 0%;
+  margin-top: 12%;
+  margin-left: 15%;
+  margin-right: 15%;
   text-align: center;
+  border-style: solid;
+}
+#button {
+  padding-bottom: 5%;
+}
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
+body {
+margin: 0;
+font-family: 'Work Sans', sans-serif;
+font-weight: 800;
+}
+
+.container {
+width: 80%;
+margin: 0 auto;
+}
+
+header {
+background: #55d6aa;
+}
+
+header::after {
+content: '';
+display: table;
+clear: both;
+}
+
+.logo {
+float: left;
+padding: 10px 10px;
+color: white;
+font-size: 20px;
+font-family: "Lucida Console";
+border-style: solid;
+}
+
+nav {
+float: right;
+}
+
+nav ul {
+margin: 0;
+padding: 0;
+list-style: none;
+}
+
+nav li {
+display: inline-block;
+margin-left: 70px;
+padding-top: 23px;
+
+position: relative;
+}
+
+nav a {
+color: #444;
+text-decoration: none;
+text-transform: uppercase;
+font-size: 14px;
+}
+
+nav a:hover {
+color: #000;
+}
+
+nav a::before {
+content: '';
+display: block;
+height: 5px;
+background-color: #444;
+
+position: absolute;
+top: 0;
+width: 0%;
+
+transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+width: 100%;
 }
