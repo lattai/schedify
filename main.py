@@ -106,8 +106,13 @@ class ScheduleHandler(webapp2.RequestHandler):
 
 class EventHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
+        email_address = user.nickname()
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+
         event_template = the_jinja_env.get_template('templates/event-feed.html')
-        events = Event.query().fetch()
+        events = Event.query(Event.owner == schedify_user.key).fetch()
+
         event_data = {
             # "newevent_url": new_event,
             "event_info": events
@@ -116,24 +121,40 @@ class EventHandler(webapp2.RequestHandler):
 
 class NewEventHandler(webapp2.RequestHandler):
     def get(self):
-        newevent_template = the_jinja_env.get_template('templates/newevent.html')
-        self.response.write(newevent_template.render())
+        user = users.get_current_user()
+        if user:
+          email_address = user.nickname()
+          schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+          if schedify_user:
+            newevent_template = the_jinja_env.get_template('templates/newevent.html')
+            self.response.write(newevent_template.render())
+            return
+        self.error(403)
+        return
     def post(self):
         # create new event?
         # look at the sign in if statement
         # grab the email adress through google users api then search
         #   for schedify through that email address
         newevent_template = the_jinja_env.get_template('templates/newevent.html')
+
+        user = users.get_current_user()
+        email_address = user.nickname()
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+
         schedify_event = Event(
+            owner = schedify_user.key,
             title = self.request.get('event_title'),
             summary = self.request.get('event_summary'),
         )
+
         schedify_event.put()
         # Add later when you add the home page html and link it to this page
         #       You need to make sure you can call a user that is loged in
+        #
         # schedify_attendance = Attendance (
-        #     # user = enter user instance,
-        #     event = schedify_event,
+        #      user =
+        #      event = schedify_event,
         # )
         self.response.write(newevent_template.render())
 

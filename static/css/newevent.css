@@ -1,7 +1,7 @@
 html {
    background-color: #e0ffe0;
    }
-#your_schedule{
+#create_event {
   margin: 0;
   padding-bottom: 80px;
   padding-top: 80px;
@@ -12,22 +12,12 @@ html {
   text-align: center;
   font-size: 50px;
 }
-#calendar-div{
- margin-left: 22%;
-/* margin-left: 320px; */
- /* margin: 0 auto; */
- padding-top: 50px;
- width: 450px;
- height: 50px;
- background-size: 100%;
- /* position: relative;
- max-width: 500px;
- margin: auto; */
- }
-#compare_button {
-  padding-bottom: 50px;
+#input_event {
+  margin-left: 44%;
+ /* margin-left: 320px; */
+  /* margin: 0 auto; */
+  padding-top: 90px;
 }
-
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
 margin: 0;

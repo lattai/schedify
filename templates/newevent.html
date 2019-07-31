@@ -6,12 +6,23 @@
     <link rel="stylesheet" href="../static/css/newevent.css">
   </head>
   <body>
-    <div class="top-navbar">
-      <!-- goes back to the event page -->
-      <a href="/event">X</a>
-    </div>
+    <header>
+      <div class="container">
+        <h5 class="logo">Schedify</h5>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/event-feed">Events</a></li>
+            <li><a href="/connections">Connections</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="{{sign_out}}">Sign Out</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+        <h1 id="create_event">Create an Event!</h1>
     <div class="container">
-      <h1>Create an Event!</h1>
+      <div id="input_event">
       <form method="post" action="/new_event">
         Title:<br>
         <input type="text" name="event_title">
@@ -22,6 +33,7 @@
         <input type="submit">
         <br>
       </form>
+      </div>
     </div>
   </body>
 </html>
