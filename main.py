@@ -143,6 +143,17 @@ class EventHandler(webapp2.RequestHandler):
             "event_info": events
         }
         self.response.write(event_template.render(event_data))
+
+class EventHandler(webapp2.RequestHandler):
+    def get(self):
+        event_template = the_jinja_env.get_template('templates/event.html')
+
+        event_data = {
+        
+        }
+
+        self.response.write(event_template.render(event_data))
+
 class NewEventHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
@@ -268,6 +279,7 @@ app = webapp2.WSGIApplication([
     ('/schedule', ScheduleHandler),
     ('/event-feed', EventHandler),
     ('/new_event', NewEventHandler),
+    ('/event', EventHandler),
     ('/connections', ConnectionsHandler),
     ('/profile', ProfileHandler)
 
