@@ -1,6 +1,10 @@
 html {
    background-color: #e0ffe0;
    }
+#image {
+    text-align: center;
+    border-style: dotted;
+}
 #greeting {
   margin: 0;
   padding-bottom: 80px;
