@@ -85,13 +85,11 @@ class LandingHandler(webapp2.RequestHandler):
         #email=self.request.get('email')) because i want to parse their email to get their cal
     schedify_user.put()
     welcome_template = the_jinja_env.get_template('templates/welcome.html')
-    home_template = the_jinja_env.get_template('templates/home.html')
     welcome_data = {
         "first_name": firstname,
         "last_name": lastname
     }
     self.response.write(welcome_template.render(welcome_data))
-    self.response.write(home_template.render(welcome_data))
 class ScheduleHandler(webapp2.RequestHandler):
     def get(self):
         welcome_template = the_jinja_env.get_template('templates/schedule.html')
@@ -99,8 +97,11 @@ class ScheduleHandler(webapp2.RequestHandler):
         email_address = user.nickname()
         email_list = email_address.split('@')
         email_start = email_list[0]
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+        
         welcome_data = {
-            "emailStart": email_start
+            "emailStart": email_start,
+            "friend_list": schedify_user.friends
         }
         self.response.write(welcome_template.render(welcome_data))
     def post(self):
@@ -116,6 +117,8 @@ class EventFeedHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+        #  create event_type variable where it calls the input value from the event-feed
+        #   html in order to check whether to display the friends event or all or ...
 
 
 
@@ -181,6 +184,9 @@ class NewEventHandler(webapp2.RequestHandler):
             owner = schedify_user.key,
             title = self.request.get('event_title'),
             summary = self.request.get('event_summary'),
+            exclusives = [],
+            attending = [],
+            not_attending = []
         )
 
         schedify_event.put()

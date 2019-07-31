@@ -40,6 +40,12 @@ class Event(ndb.Model):
     owner = ndb.KeyProperty(SchedifyUser)
     title = ndb.StringProperty()
     summary = ndb.StringProperty()
+    # property where if empty then this event will be shared with all
+    #   friends, if it has elements then this will only be shared with those
+    #   users
+    exclusives = ndb.KeyProperty(SchedifyUser, repeated=True)
+    attending = ndb.KeyProperty(SchedifyUser, repeated=True)
+    not_attending = ndb.KeyProperty(SchedifyUser, repeated=True)
 
 
 # do not even need
