@@ -12,16 +12,18 @@
     </div>
     <div class="container">
       <h1>Make a connection!</h1>
-      <form method="post" action="/add_connection">
-        Search for Username:<br>
+      <form method="post" action="/profile">
+        Search for Account<br>
+        Enter username:<br>
         <input type="text" name="username_search">
+        <input type="submit" value="Go!">
         <br>
       </form>
-      <ul>
+      <!-- <ul>
         {% for friend in friend_list %}
           <li><a href="/profile">{{friend.first_name}}</a></li>
         {% endfor %}
-      </ul>
+      </ul> -->
     </div>
   </body>
 </html>
