@@ -98,10 +98,11 @@ class ScheduleHandler(webapp2.RequestHandler):
         email_list = email_address.split('@')
         email_start = email_list[0]
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
-        
+
         welcome_data = {
             "emailStart": email_start,
-            "friend_list": schedify_user.friends
+            "friend_list": schedify_user.friends,
+            "friendIndex":0
         }
         self.response.write(welcome_template.render(welcome_data))
     def post(self):
@@ -117,17 +118,28 @@ class EventFeedHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
-        #  create event_type variable where it calls the input value from the event-feed
-        #   html in order to check whether to display the friends event or all or ...
+
+        user = users.get_current_user()
+        email_address = user.nickname()
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+
+        event_ownership = self.request.get('event-type')
 
 
+        friends_key_list = schedify_user.friends
+        users_key = [schedify_user.key]
+        users_key.extend(friends_key_list)
+
+        event_list = []
+        for user_key in users_key:
+            events = Event.query(Event.owner == user_key).fetch()
+            event_list.extend(events)
 
         event_template = the_jinja_env.get_template('templates/event-feed.html')
-        events = Event.query(Event.owner == schedify_user.key).fetch()
 
         event_data = {
             # "newevent_url": new_event,
-            "event_info": events
+            "event_info": event_list
         }
         self.response.write(event_template.render(event_data))
 
@@ -136,14 +148,30 @@ class EventFeedHandler(webapp2.RequestHandler):
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
 
+        event_ownership = self.request.get('event-type')
 
+        if event_ownership == "self":
+            event_list = Event.query(Event.owner == schedify_user.key).fetch()
+        elif event_ownership == "friends":
+            friends_key_list = schedify_user.friends
+            event_list = []
+            for friend_key in friends_key_list:
+                events = Event.query(Event.owner == friend_key).fetch()
+                event_list.extend(events)
+        elif event_ownership == "all":
+            friends_key_list = schedify_user.friends
+            users_key = [schedify_user.key]
+            users_key.extend(friends_key_list)
+
+            event_list = []
+            for user_key in users_key:
+                events = Event.query(Event.owner == user_key).fetch()
+                event_list.extend(events)
 
         event_template = the_jinja_env.get_template('templates/event-feed.html')
-        events = Event.query(Event.owner == schedify_user.key).fetch()
 
         event_data = {
-            # "newevent_url": new_event,
-            "event_info": events
+            "event_info": event_list
         }
         self.response.write(event_template.render(event_data))
 
