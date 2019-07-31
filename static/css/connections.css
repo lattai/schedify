@@ -5,11 +5,17 @@ html {
    max-width: 500px;
    margin: auto;
    } */
- h2 {
-   font-family: impact;
-   color: white;
-   text-shadow: 2px 2px black;
-    }
+#connections_page {
+  margin: 0;
+  padding-bottom: 80px;
+  padding-top: 80px;
+  background: #222;
+  font-family: monaco;
+  color: white;
+  text-shadow: 2px 2px black;
+  text-align: center;
+  font-size: 50px;
+}
 
     @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
     body {

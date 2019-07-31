@@ -16,7 +16,11 @@ html {
   margin-left: 44%;
  /* margin-left: 320px; */
   /* margin: 0 auto; */
-  padding-top: 90px;
+  padding-top: 4%;
+}
+#go_back {
+  padding-left: 20%;
+  padding-top: 2%;
 }
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
