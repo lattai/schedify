@@ -99,6 +99,7 @@ class ScheduleHandler(webapp2.RequestHandler):
         email_address = user.nickname()
         email_list = email_address.split('@')
         email_start = email_list[0]
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
         welcome_data = {
             "emailStart": email_start,
             "friend_list": schedify_user.friends
