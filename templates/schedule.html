@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <title>Your Schedule</title>
+<link rel="stylesheet" href="../static/css/schedule.css">
 <head>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,26 +9,41 @@
 </head>
 <body>
 
+  <header>
+    <div class="container">
+      <h5 class="logo">Schedify</h5>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/event-feed">Events</a></li>
+          <li><a href="/connections">Connections</a></li>
+          <li><a href="/profile">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-
-<div >
-  <div >
-    <h1>My calendar</h1>
+<div>
+  <div>
+    <h1 id="my_calendar">My Calendar</h1>
   </div>
 </div>
 
-<div>
-  <button class="rMenuButton" onclick="openRightMenu()">&#9776;</button>
-
-  <div class="rMenuButtonOpened" style="display:none;right:0;" id="rightMenu">
-    <button onclick="closeRightMenu()" class="rMenuButtonClose">Close &times;</button>
-    <a id ="resetScheduleView"href="" class="sidebarbutton">Your Month</a>
-    <a id= "compare1" href="#1" class="sidebarbutton">friend[0]</a>
-    <a id= "compare2"href="#2" class="sidebarbutton">friend[1]</a>
-    <a id= "compare3"href="#3" class="sidebarbutton">friend[2]</a>
-  </div>
+<div id="body">
   <div class="yourSchedule">
     <h1>Your Schedule</h1>
+    <div id="rMenuButton">
+    <button class="rMenuButton" onclick="openRightMenu()">Choose a Connection</button>
+  </div>
+
+    <div class="rMenuButtonOpened" style="display:none;right:0;" id="rightMenu">
+      <button onclick="closeRightMenu()" class="rMenuButtonClose">Close &times;</button>
+      <a id ="resetScheduleView"href="" class="sidebarbutton">Your Month</a>
+      <a id= "compare1" href="#1" class="sidebarbutton">friend[0]</a>
+      <a id= "compare2"href="#2" class="sidebarbutton">friend[1]</a>
+      <a id= "compare3"href="#3" class="sidebarbutton">friend[2]</a>
+    </div>
+    <br>
 
     <iframe id="your-month"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="600" frameborder="0" scrolling="no"></iframe>
 

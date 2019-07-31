@@ -13,13 +13,14 @@ html {
   font-size: 50px;
 }
 #input_event {
-  margin-left: 44%;
+  text-align: center;
+  /* margin-left: 44%; */
  /* margin-left: 320px; */
   /* margin: 0 auto; */
   padding-top: 3%;
 }
 #go_back {
-  padding-left: 25%;
+  padding-left: 27%;
   padding-top: 3%;
 }
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
