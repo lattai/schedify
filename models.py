@@ -7,13 +7,17 @@ class SchedifyUser(ndb.Model):
     last_name = ndb.StringProperty()
     username = ndb.StringProperty()
     email = ndb.StringProperty()
-    friends = ndb.KeyProperty("SchedifyUser", repeated=True)
+    friends = ndb.KeyProperty(kind="SchedifyUser", repeated=True)
 
     # is this needed? I have not used this yet
-    def own_key(self):
-        user_key = ndb.KeyProperty("SchedifyUser")
-        return user_key
+    def add_friend(self, key):
+        self.friends.append(key)
+        self.put()
 
+    def remove_friend(self, key):
+        self.friends.remove(key)
+        self.put()
+        # searches through the friend list and removes friend
 
 # not implemented yet
 # do not even need

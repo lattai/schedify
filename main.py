@@ -77,6 +77,7 @@ class LandingHandler(webapp2.RequestHandler):
         first_name = firstname,
         last_name = lastname,
         username = username,
+        friends = [],
         email=user.nickname())
         #email=self.request.get('email')) because i want to parse their email to get their cal
     schedify_user.put()
@@ -179,8 +180,14 @@ class NewEventHandler(webapp2.RequestHandler):
 
 class ConnectionsHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
+        email_address = user.nickname()
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
         connections_template = the_jinja_env.get_template('templates/connections.html')
-        self.response.write(connections_template.render())
+        connections_data = {
+            "friend_list": schedify_user.friends
+        }
+        self.response.write(connections_template.render(connections_data))
     def post(self):
         self.response.write(connections_template.render(meme_data))
 
@@ -199,11 +206,54 @@ class AddConnectionHandler(webapp2.RequestHandler):
         self.response.write(add_connections_template.render(connections_data))
 
 class ProfileHandler(webapp2.RequestHandler):
+    # your profile
     def get(self):
         profile_template = the_jinja_env.get_template('templates/profile.html')
-        self.response.write(profile_template.render())
+        user = users.get_current_user()
+        email_address = user.nickname()
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+
+        profile_data = {
+            "user_name": schedify_user.username,
+            "first_name": schedify_user.first_name,
+            "last_name": schedify_user.last_name,
+            "account": "self"
+        }
+        self.response.write(profile_template.render(profile_data))
+
+    # other users profile
     def post(self):
-        self.response.write(welcome_template.render(meme_data))
+        profile_template = the_jinja_env.get_template('templates/profile.html')
+        user = users.get_current_user()
+        email_address = user.nickname()
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+
+        # there should only be one username per account
+        username_search = self.request.get('username_search')
+        user_search = SchedifyUser.query(SchedifyUser.username == username_search).get()
+        status = self.request.get('friend_status')
+
+        # if button to add/remove friend was cliked launch this code
+        if (status == "add_friend"):
+            schedify_user.add_friend(user_search.key)
+        elif (status == "remove_friend"):
+            schedify_user.remove_friend(user_search.key)
+
+        # checks if profile is part of friends group
+        status = False
+
+        for friend_key in schedify_user.friends:
+            if friend_key == user_search.key:
+                status = True
+
+        profile_data = {
+            "user_name": user_search.username,
+            "first_name": user_search.first_name,
+            "last_name": user_search.last_name,
+            "friend_status": status,
+            "account": "other"
+        }
+        self.response.write(profile_template.render(profile_data))
 
 
 app = webapp2.WSGIApplication([

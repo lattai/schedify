@@ -38,12 +38,13 @@
     <br>
     <br>
 
-  {% for event in event_info %}
+  {% for friend_key in friend_list %}
+  {% set friend = friend_key.get() %}
     <div class=row>
       <div class=img></div>
       <div class=description></div>
-        <p> {{event.title}} </p>
-        <p> {{event.summary}} </p>
+        <p> {{friend.username}} </p>
+        <p> {{friend.first_name}} </p>
     </div>
   {% endfor %}
   </div>
