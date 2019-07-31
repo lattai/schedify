@@ -188,8 +188,6 @@ class ConnectionsHandler(webapp2.RequestHandler):
             "friend_list": schedify_user.friends
         }
         self.response.write(connections_template.render(connections_data))
-    def post(self):
-        self.response.write(connections_template.render(meme_data))
 
 class AddConnectionHandler(webapp2.RequestHandler):
     def get(self):
@@ -221,7 +219,7 @@ class ProfileHandler(webapp2.RequestHandler):
         }
         self.response.write(profile_template.render(profile_data))
 
-    # other users profile
+    # user profile lookup
     def post(self):
         profile_template = the_jinja_env.get_template('templates/profile.html')
         user = users.get_current_user()
@@ -231,27 +229,34 @@ class ProfileHandler(webapp2.RequestHandler):
         # there should only be one username per account
         username_search = self.request.get('username_search')
         user_search = SchedifyUser.query(SchedifyUser.username == username_search).get()
-        status = self.request.get('friend_status')
 
-        # if button to add/remove friend was cliked launch this code
-        if (status == "add_friend"):
-            schedify_user.add_friend(user_search.key)
-        elif (status == "remove_friend"):
-            schedify_user.remove_friend(user_search.key)
+        # checks to see if user is passing in their own Account
+        if user_search == schedify_user:
+            account_status = "self"
+            status = None
+        else:
+            account_status = "other"
+            status = self.request.get('friend_status')
 
-        # checks if profile is part of friends group
-        status = False
+            # if button to add/remove friend was cliked launch this code
+            if (status == "add_friend"):
+                schedify_user.add_friend(user_search.key)
+            elif (status == "remove_friend"):
+                schedify_user.remove_friend(user_search.key)
 
-        for friend_key in schedify_user.friends:
-            if friend_key == user_search.key:
-                status = True
+            # checks if profile is part of friends group
+            status = False
+
+            for friend_key in schedify_user.friends:
+                if friend_key == user_search.key:
+                    status = True
 
         profile_data = {
             "user_name": user_search.username,
             "first_name": user_search.first_name,
             "last_name": user_search.last_name,
             "friend_status": status,
-            "account": "other"
+            "account": account_status
         }
         self.response.write(profile_template.render(profile_data))
 
