@@ -30,23 +30,35 @@
     </header>
 
     <h1 id="connections_page">Connections</h1>
-    <!-- <h2>Your Go-to Platform for Memes!</h2> -->
-   <div id="connections-div">
-        <a href="/add_connection">Make a connection</a>
-      </button>
     <br>
     <br>
-    <br>
-
-  {% for friend_key in friend_list %}
-  {% set friend = friend_key.get() %}
-    <div class=row>
-      <div class=img></div>
-      <div class=description></div>
-        <p> {{friend.username}} </p>
-        <p> {{friend.first_name}} </p>
+    <div class="container">
+      <h1>Make a connection!</h1>
+      <form method="post" action="/profile">
+        Search for Account<br>
+        Enter username:<br>
+        <input type="text" name="username_search">
+        <input type="submit" value="Go!">
+        <br>
+      </form>
+      <!-- <ul>
+        {% for friend in friend_list %}
+          <li><a href="/profile">{{friend.first_name}}</a></li>
+        {% endfor %}
+      </ul> -->
     </div>
-  {% endfor %}
-  </div>
+    <div id="connections">
+      <h1>Your Connections:</h1>
+      {% for friend_key in friend_list %}
+        {% set friend = friend_key.get() %}
+        <div class=row>
+          <div class=img></div>
+          <div class=description>
+            <p> {{friend.username}} </p>
+            <p> {{friend.first_name}} </p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   </body>
 </html>

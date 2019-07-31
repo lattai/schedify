@@ -189,19 +189,16 @@ class ConnectionsHandler(webapp2.RequestHandler):
         }
         self.response.write(connections_template.render(connections_data))
 
-class AddConnectionHandler(webapp2.RequestHandler):
-    def get(self):
-        add_connections_template = the_jinja_env.get_template('templates/add-connections.html')
-        self.response.write(add_connections_template.render())
+    # this shows the list of users who match that username
     def post(self):
-        add_connections_template = the_jinja_env.get_template('templates/add-connections.html')
+        connections_template = the_jinja_env.get_template('templates/connections.html')
 
         username_search = self.request.get('username_search')
         possible_usernames = SchedifyUser.query(SchedifyUser.username == username_search).fetch()
         connections_data = {
             "friend_list": possible_usernames
         }
-        self.response.write(add_connections_template.render(connections_data))
+        self.response.write(connections_template.render(connections_data))
 
 class ProfileHandler(webapp2.RequestHandler):
     # your profile
@@ -268,7 +265,6 @@ app = webapp2.WSGIApplication([
     ('/event-feed', EventHandler),
     ('/new_event', NewEventHandler),
     ('/connections', ConnectionsHandler),
-    ('/add_connection', AddConnectionHandler),
     ('/profile', ProfileHandler)
 
 ], debug=True)
