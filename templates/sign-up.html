@@ -6,11 +6,23 @@
     <link rel="stylesheet" href="../static/css/sign-up.css">
   </head>
   <body>
-    <div class="top-navbar">
+    <header>
+      <div class="container">
+        <h5 class="logo">Schedify</h5>
+        <nav>
+          <ul>
+      <li><a href="{{sign_out}}">Go Back</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- <div class="top-navbar">
       <a href="{{sign_out}}">X</a>
-    </div>
+    </div> -->
+    <h1 id="make_profile">Let's Get Started!</h1>
+    <div id="create_account">
     <div class="container">
-      <h1>Let's Get Started!</h1>
+      <!-- <h1>Let's Get Started!</h1> -->
       <form method="post" action="/">
         User Name:<br>
         <input type="text" name="user_name">
@@ -24,6 +36,7 @@
         <input type="submit">
         <br>
       </form>
+    </div>
     </div>
   </body>
 </html>
