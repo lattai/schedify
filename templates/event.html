@@ -29,45 +29,15 @@
       <a href="/profile">Profile</a>
     </div> -->
 
-    <h1 id="events_header">{{user_name}}'s Event</h1>
-    <!-- <h2>Your Go-to Platform for Memes!</h2> -->
-
-    <div id="connections">
-      <h1>Your Connections:</h1>
-      {% for friend_key in friend_list %}
-        {% set friend = friend_key.get() %}
+    <h1 id="events_header">{{event_title}} Delete this text later</h1>
+    <div id="event_text">
+      <h1>{{user_name}}'s Event:</h1>
         <div class=row>
           <div class=img></div>
           <div class=description>
-            <p> {{friend.username}} </p>
-            <p> {{friend.first_name}} </p>
+            <p> {{event_description}} Hello, this an event I guess not sure what it'll be but hopefully fun and is this taking up a lot of space because that is my intent to make this paragraph as long as possible to test out the padding between the header and paragraph I also think that I need a period pretty soon so I guess I'll just end the sentence here after saying that who ever is reading this should delete this paragraph when the jinja code is actually working thanks in advance also is jinja spelled jinja or jenja idk I always get that confused. </p>
           </div>
         </div>
-      {% endfor %}
     </div>
-
-<div id="body_div">
-   <div id="event-div">
-     <select name="event-type">
-      <option value="all">All Events</option>
-      <option value="friend-events">Friend Events</option>
-    </select>
-      <button type="button" name="button">
-        <a href="/new_event">Create Event</a>
-      </button>
-    <br>
-    <br>
-    <br>
-
-  {% for event in event_info %}
-    <div class=row>
-      <div class=img></div>
-      <div class=description></div>
-        <p> {{event.title}} </p>
-        <p> {{event.summary}} </p>
-    </div>
-  {% endfor %}
-  </div>
-</div>
   </body>
 </html>
