@@ -107,7 +107,7 @@ class ScheduleHandler(webapp2.RequestHandler):
         }
         self.response.write(welcome_template.render())
 
-class EventHandler(webapp2.RequestHandler):
+class EventFeedHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         email_address = user.nickname()
@@ -145,7 +145,7 @@ class EventHandler(webapp2.RequestHandler):
         event_template = the_jinja_env.get_template('templates/event.html')
 
         event_data = {
-        
+
         }
 
         self.response.write(event_template.render(event_data))
@@ -273,7 +273,7 @@ app = webapp2.WSGIApplication([
     ('/', LandingHandler),
     # schedule page should be connected to home page
     ('/schedule', ScheduleHandler),
-    ('/event-feed', EventHandler),
+    ('/event-feed', EventFeedHandler),
     ('/new_event', NewEventHandler),
     ('/event', EventHandler),
     ('/connections', ConnectionsHandler),
