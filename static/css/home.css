@@ -13,11 +13,12 @@ html {
   font-size: 50px;
 }
 #compare_button {
-  padding-right: 50%;
+  padding-top: 1%;
+  padding-right: 59.5%;
 }
 #calendar-div {
     text-align: center;
- padding-top: 50px;
+    padding-top: 50px;
  }
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
