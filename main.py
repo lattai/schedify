@@ -181,6 +181,9 @@ class NewEventHandler(webapp2.RequestHandler):
             owner = schedify_user.key,
             title = self.request.get('event_title'),
             summary = self.request.get('event_summary'),
+            exclusives = [],
+            attending = [],
+            not_attending = []
         )
 
         schedify_event.put()
