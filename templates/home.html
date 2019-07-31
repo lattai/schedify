@@ -156,7 +156,7 @@
         }).then(function(response) {
           var events = response.result.items;
           if (events.length == 0) {
-            appendPre('{{first_name}}  name here ');
+            appendPre('{{first_name}}  {{last_name}}');
           }
         });
       }

@@ -34,7 +34,10 @@ class LandingHandler(webapp2.RequestHandler):
 
         home_data = {
             "emailStart": email_start,
-            "sign_out": signout_link
+            "sign_out": signout_link,
+            "first_name": schedify_user.first_name,
+            "last_name":schedify_user.last_name,
+            "friend_list": schedify_user.friends
         }
         home_template = the_jinja_env.get_template('templates/home.html')
         self.response.write(home_template.render(home_data))
@@ -82,12 +85,13 @@ class LandingHandler(webapp2.RequestHandler):
         #email=self.request.get('email')) because i want to parse their email to get their cal
     schedify_user.put()
     welcome_template = the_jinja_env.get_template('templates/welcome.html')
+    home_template = the_jinja_env.get_template('templates/home.html')
     welcome_data = {
         "first_name": firstname,
-        # "last_name": lastname
+        "last_name": lastname
     }
     self.response.write(welcome_template.render(welcome_data))
-
+    self.response.write(home_template.render(welcome_data))
 class ScheduleHandler(webapp2.RequestHandler):
     def get(self):
         welcome_template = the_jinja_env.get_template('templates/schedule.html')
