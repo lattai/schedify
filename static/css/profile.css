@@ -15,13 +15,17 @@ html {
   text-align: center;
   font-size: 50px;
 }
+#settings_button {
+  text-align: center;
+}
 #user_info {
   text-align: center;
   border-style: solid;
   margin: 4% 20% 0% 20%;
   padding-left: 10%;
   padding-right: 10%;
-  padding-bottom: 2.4%;
+  padding-top: 1%;
+  padding-bottom: 2%;
 }
 /* #user_picture {
   position: fixed;

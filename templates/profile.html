@@ -29,11 +29,11 @@
 <div id="user_info">
     <h1>{{user_name}}</h1>
     <!-- displays user profile -->
-    {% if account == "self" %}
+    <!-- {% if account == "self" %}
       <button type="button" name="button">
-        <a href="/profile">setting</a>
+        <a href="/profile">Settings</a>
       </button>
-    {% endif %}
+    {% endif %} -->
 
     <!-- displays friend profile -->
     {% if account == "other" %}
@@ -60,5 +60,14 @@
       <p>Biography of person</p>
     </div>
 </div>
+<br>
+<br>
+{% if account == "self" %}
+<div id="settings_button">
+  <button type="button" name="button">
+    <a href="/profile">Settings</a>
+  </button>
+</div>
+{% endif %}
   </body>
 </html>
