@@ -31,6 +31,9 @@
 
 <div id="body">
   <div class="yourSchedule">
+    <div id="rMenuButton">
+    <button class="rMenuButton" onclick="openRightMenu()">Choose a Connection</button>
+  </div>
     <div class="rMenuButtonOpened" style="display:none;right:0;" id="rightMenu">
       <button onclick="closeRightMenu()" class="rMenuButtonClose">Close &times;</button>
       <a id ="resetScheduleView"href="" class="sidebarbutton">Your Month</a>
@@ -49,9 +52,6 @@
             <br>
 
             <iframe id="your-month"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="600" frameborder="0" scrolling="no"></iframe>
-            <div id="rMenuButton">
-            <button class="rMenuButton" onclick="openRightMenu()">Choose a Connection</button>
-          </div>
           </div>
           <div class="compare">
             <iframe id="your-week" src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
