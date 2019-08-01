@@ -233,6 +233,7 @@ class ConnectionsHandler(webapp2.RequestHandler):
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
         connections_template = the_jinja_env.get_template('templates/connections.html')
+        
         connections_data = {
             "friend_list": schedify_user.friends,
             "requestkey_list": schedify_user.requests
@@ -292,15 +293,6 @@ class ProfileHandler(webapp2.RequestHandler):
             if (friend_status == "add friend"):
                 request_status = True
                 user_search.add_request(schedify_user.key)
-                # checks if user is in request list
-                # for request_key in user_search.requests:
-                #     if request_key != schedify_user.key:
-                #         request_add = True
-                # request_add = False
-                # if request_add:
-                #     user_search.add_request(schedify_user.key)
-                    # user_search.add_friend(schedify_user.key)
-
             elif (friend_status == "remove friend"):
                 schedify_user.remove_friend(user_search.key)
                 user_search.remove_friend(schedify_user.key)
