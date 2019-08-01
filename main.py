@@ -102,7 +102,8 @@ class ScheduleHandler(webapp2.RequestHandler):
         welcome_data = {
             "emailStart": email_start,
             "friend_list": schedify_user.friends,
-            "friendIndex":0
+            "friendIndex":0,
+            "friendEmailStart": None
         }
         self.response.write(welcome_template.render(welcome_data))
     def post(self):
@@ -233,7 +234,7 @@ class ConnectionsHandler(webapp2.RequestHandler):
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
         connections_template = the_jinja_env.get_template('templates/connections.html')
-        
+
         connections_data = {
             "friend_list": schedify_user.friends,
             "requestkey_list": schedify_user.requests
@@ -242,13 +243,20 @@ class ConnectionsHandler(webapp2.RequestHandler):
 
     # this shows the list of users who match that username
     def post(self):
+        user = users.get_current_user()
+        email_address = user.nickname()
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
         connections_template = the_jinja_env.get_template('templates/connections.html')
-
-        username_search = self.request.get('username_search')
-        possible_usernames = SchedifyUser.query(SchedifyUser.username == username_search).fetch()
-
+        resolve_request = self.request.get('request_answer')
+        if resolve_request == "Accept":
+            requester = self.request.get('request_user')
+            schedify_user.add_friend(requester)
+            requester.add_friend(schedify_user.key)
+        elif resolve_request == "Decline":
+            schedify_user.remove_request(requester)
         connections_data = {
-            "friend_list": possible_usernames
+            "friend_list": schedify_user.friends,
+            "requestkey_list": schedify_user.requests
         }
         self.response.write(connections_template.render(connections_data))
 
