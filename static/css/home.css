@@ -3,8 +3,8 @@ html {
    }
 #your_schedule{
   margin: 0;
-  padding-bottom: 80px;
-  padding-top: 80px;
+  padding-bottom: 40px;
+  padding-top: 40px;
   background: #222;
   font-family: monaco;
   color: white;
@@ -18,7 +18,11 @@ html {
 }
 #calendar-div {
     text-align: center;
-    padding-top: 50px;
+    border-style: solid;
+    margin: 4%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    /* padding-top: 50px; */
  }
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');

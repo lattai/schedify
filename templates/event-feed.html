@@ -40,7 +40,7 @@
         <option value="self">My Events</option>
         <option value="friends">Friend Events</option>
       </select>
-      <input type="submit" name="" value="launch">
+      <input type="submit" name="" value="Launch">
      </form>
       <button type="button" name="button">
         <a href="/new_event">Create Event</a>
@@ -54,11 +54,10 @@
     <div class=row>
       <div class=img></div>
       <div class=description></div>
-        <p>Title: {{event.title}} </p>
+        <p id="title_text">Title: {{event.title}} </p>
         {% set owner = event.owner.get() %}
         <p>Owner: {{owner.username}}</p>
-        <p>Summary: {{event.summary}} </p>
-
+        <p id="paragraph_text">Summary: {{event.summary}}</p>
     </div>
   {% endfor %}
   </div>
