@@ -45,7 +45,7 @@
         {% for search in search_list %}
           <p>{{search.first_name}} {{search.last_name}}</p>
           <form class="" action="/profile" method="post">
-            <input type="hidden" name="username_searchid" value="{{search.key.id()}}">
+            <input type="hidden" name="username_searchid" value={{search.key.id()}}>
             <input type="submit" name="" value="Go">
           </form>
         {% endfor %}
