@@ -41,7 +41,7 @@
       <a id ="resetScheduleView"href="" class="sidebarbutton">Your Month</a>
       {% for friend_key in friend_list %}
         {% set friend = friend_key.get() %}
-        <a id= "compare{{index}}" href="#1" class="sidebarbutton">{{friend.first_name}}</a>
+        <a id= "compare{{index}}" href="#1" class="sidebarbutton">{{friend.email}}</a>
       {% endfor %}
     </div>
     <br>
