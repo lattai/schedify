@@ -234,7 +234,8 @@ class ConnectionsHandler(webapp2.RequestHandler):
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
         connections_template = the_jinja_env.get_template('templates/connections.html')
         connections_data = {
-            "friend_list": schedify_user.friends
+            "friend_list": schedify_user.friends,
+            "requestkey_list": schedify_user.requests
         }
         self.response.write(connections_template.render(connections_data))
 
@@ -244,6 +245,7 @@ class ConnectionsHandler(webapp2.RequestHandler):
 
         username_search = self.request.get('username_search')
         possible_usernames = SchedifyUser.query(SchedifyUser.username == username_search).fetch()
+
         connections_data = {
             "friend_list": possible_usernames
         }
@@ -279,29 +281,55 @@ class ProfileHandler(webapp2.RequestHandler):
         # checks to see if user is passing in their own Account
         if user_search == schedify_user:
             account_status = "self"
-            status = None
+            friend_status = None
+            request_status = None
         else:
             account_status = "other"
-            status = self.request.get('friend_status')
+            friend_status = self.request.get('friend_status')
+            request_status = False
 
             # if button to add/remove friend was cliked launch this code
-            if (status == "add_friend"):
-                schedify_user.add_friend(user_search.key)
-            elif (status == "remove_friend"):
+            if (friend_status == "add friend"):
+                request_add = False
+
+                # checks if user is in request list 
+                for request_key in user_search.requests:
+                    if request_key != schedify_user.key:
+                        request_add = True
+
+                if request_add:
+                    user_search.add_request(schedify_user.key)
+
+                # user_search.add_friend(schedify_user.key)
+                request_status = True
+            elif (friend_status == "remove friend"):
                 schedify_user.remove_friend(user_search.key)
+                user_search.remove_friend(schedify_user.key)
+                request_status = False
+            elif (friend_status == "request"):
+                schedify_user.remove_request(user_search.key)
+                request_status = False
 
             # checks if profile is part of friends group
-            status = False
+            friend_status = False
 
             for friend_key in schedify_user.friends:
                 if friend_key == user_search.key:
-                    status = True
+                    friend_status = True
+
+            # check if you requested a connections
+            for request_key in user_search.requests:
+                if request_key == schedify_user.key:
+                    request_status = True
+
+
 
         profile_data = {
             "user_name": user_search.username,
             "first_name": user_search.first_name,
             "last_name": user_search.last_name,
-            "friend_status": status,
+            "friend_status": friend_status,
+            "request_status": request_status,
             "account": account_status
         }
         self.response.write(profile_template.render(profile_data))

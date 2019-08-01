@@ -28,17 +28,25 @@
     {% if account == "self" %}
       <button type="button" name="button">
         <a href="/profile">setting</a>
+      </button>
     {% endif %}
 
     <!-- displays friend profile -->
     {% if account == "other" %}
       <form class="" action="/profile" method="post">
+        <!-- if they are not in your friend status -->
         {% if friend_status == false %}
-        <input type="submit" name="friend_status" value="add_friend">
+          {% if request_status == false %}
+            <input type="submit" name="friend_status" value="add friend">
+          {% endif %}
+          {% if request_status == true %}
+            <input type="submit" name="friend_status" value="request">
+          {% endif %}
         {% endif %}
 
+        <!-- if they are in your friends list -->
         {% if friend_status == true %}
-        <input type="submit" name="friend_status" value="remove_friend">
+          <input type="submit" name="friend_status" value="remove friend">
         {% endif %}
         <input type="hidden" name="username_search" value={{user_name}}>
       </form>

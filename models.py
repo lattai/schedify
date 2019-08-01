@@ -8,8 +8,16 @@ class SchedifyUser(ndb.Model):
     username = ndb.StringProperty()
     email = ndb.StringProperty()
     friends = ndb.KeyProperty(kind="SchedifyUser", repeated=True)
+    requests = ndb.KeyProperty(kind="SchedifyUser", repeated=True)
 
-    # is this needed? I have not used this yet
+    def add_request(self, key):
+        self.requests.append(key)
+        self.put()
+
+    def remove_request(self, key):
+        self.requests.remove(key)
+        self.put()
+
     def add_friend(self, key):
         self.friends.append(key)
         self.put()

@@ -46,6 +46,18 @@
           <li><a href="/profile">{{friend.first_name}}</a></li>
         {% endfor %}
       </ul> -->
+
+    <div class="requests">
+      <h1>Requests:</h1>
+      {% for request_key in requestkey_list %}
+        {% set request = request_key.get() %}
+        <div class="each-request">
+          <h3>Username: {{request.username}}</h3>
+          <p>Name: {{request.first_name}} {{request.last_name}}</p>
+        </div>
+      {% endfor %}
+    </div>
+
     </div>
     <div id="connections">
       <h1>Your Connections:</h1>
