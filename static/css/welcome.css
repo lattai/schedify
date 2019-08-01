@@ -16,7 +16,7 @@ html {
   font-size: 40px;
 }
 #welcome_text {
-  margin-top: 12%;
+  margin-top: 2%;
   margin-left: 15%;
   margin-right: 15%;
   text-align: center;
@@ -24,6 +24,9 @@ html {
 }
 #button {
   padding-bottom: 5%;
+}
+#gif_stuff {
+  text-align: center;
 }
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
