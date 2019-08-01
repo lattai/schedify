@@ -37,8 +37,10 @@
 
     <!-- displays friend profile -->
     {% if account == "other" %}
+
       <form class="" action="/profile" method="post">
-        <!-- if they are not in your friend status -->
+        <input type="hidden" name="username_searchid" value="{{search_id}}">
+        <!-- if they are not in your friend list -->
         {% if friend_status == false %}
           {% if request_status == false %}
             <input type="submit" name="friend_status" value="add friend">
