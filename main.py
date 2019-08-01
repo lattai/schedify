@@ -101,7 +101,8 @@ class ScheduleHandler(webapp2.RequestHandler):
 
         welcome_data = {
             "emailStart": email_start,
-            "friend_list": schedify_user.friends
+            "friend_list": schedify_user.friends,
+            "friendIndex":0
         }
         self.response.write(welcome_template.render(welcome_data))
     def post(self):
