@@ -54,9 +54,10 @@
         <div class="each-request">
           <h3>Username: {{request.username}}</h3>
           <p>Name: {{request.first_name}} {{request.last_name}}</p>
-          <form class="" action="/connections" method="get">
+          <form class="" action="/connections" method="post">
             <input type="submit" name="request_answer" value="Accept">
             <input type="submit" name="request_answer" value="Decline">
+            <input type="hidden" name="request_user" value={{request_key}}>
           </form>
         </div>
       {% endfor %}
