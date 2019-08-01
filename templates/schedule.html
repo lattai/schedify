@@ -39,11 +39,13 @@
     <div class="rMenuButtonOpened" style="display:none;right:0;" id="rightMenu">
       <button onclick="closeRightMenu()" class="rMenuButtonClose">Close &times;</button>
       <a id ="resetScheduleView"href="" class="sidebarbutton">Your Month</a>
-      {% set currentEmail = friend.email%}
-      {% set index = loop.index%}
-      {% set list1 = currentEmail.split('@') %}%}
+
       {% for friend_key in friend_list %}
         {% set friend = friend_key.get() %}
+        {% set currentEmail = friend.email%}
+        {% set index = loop.index%}
+        {% set friendIndex = index%}
+        {% set list1 = currentEmail.split('@') %}
         <a id= "compare{{index}}" href="#{{index}}" class="sidebarbutton">{{friend.first_name}} {{friend.last_name}}</a>
       {% endfor %}
     </div>
@@ -56,10 +58,9 @@
     <iframe id="your-week" src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
     <!-- your schedule ^^^ -->
 
+    <br><br>{{friendIndex}}<br>
+    <iframe id="their-week"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
     <br><br><br>
-    <iframe id="their-week"src="https://calendar.google.com/calendar/embed?src={{list1[0]}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
-    <br><br><br>
-    {% endif%}
 
     <!-- Friend's Schedule ^^^ -->
   </div>
