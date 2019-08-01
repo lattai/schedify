@@ -25,6 +25,9 @@ html {
 #button {
   padding-bottom: 5%;
 }
+#gif_stuff {
+  text-align: center;
+}
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
 margin: 0;
