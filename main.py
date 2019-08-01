@@ -290,24 +290,23 @@ class ProfileHandler(webapp2.RequestHandler):
 
             # if button to add/remove friend was cliked launch this code
             if (friend_status == "add friend"):
-                request_add = False
-
-                # checks if user is in request list 
-                for request_key in user_search.requests:
-                    if request_key != schedify_user.key:
-                        request_add = True
-
-                if request_add:
-                    user_search.add_request(schedify_user.key)
-
-                # user_search.add_friend(schedify_user.key)
                 request_status = True
+                user_search.add_request(schedify_user.key)
+                # checks if user is in request list
+                # for request_key in user_search.requests:
+                #     if request_key != schedify_user.key:
+                #         request_add = True
+                # request_add = False
+                # if request_add:
+                #     user_search.add_request(schedify_user.key)
+                    # user_search.add_friend(schedify_user.key)
+
             elif (friend_status == "remove friend"):
                 schedify_user.remove_friend(user_search.key)
                 user_search.remove_friend(schedify_user.key)
                 request_status = False
             elif (friend_status == "request"):
-                schedify_user.remove_request(user_search.key)
+                user_search.remove_request(schedify_user.key)
                 request_status = False
 
             # checks if profile is part of friends group
