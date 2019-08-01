@@ -235,10 +235,13 @@ class ConnectionsHandler(webapp2.RequestHandler):
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
         connections_template = the_jinja_env.get_template('templates/connections.html')
+        search_username = self.request.get('username_search')
+        searches = SchedifyUser.query().filter(SchedifyUser.username == search_username).fetch()
 
         connections_data = {
             "friend_list": schedify_user.friends,
-            "requestkey_list": schedify_user.requests
+            "requestkey_list": schedify_user.requests,
+            "search_list": searches
         }
         self.response.write(connections_template.render(connections_data))
 
@@ -291,8 +294,9 @@ class ProfileHandler(webapp2.RequestHandler):
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
 
         # there should only be one username per account
-        username_search = self.request.get('username_search')
-        user_search = SchedifyUser.query(SchedifyUser.username == username_search).get()
+        username_id = self.request.get('username_searchid')
+        username_key = ndb.Key("SchedifyUser", int(username_id))
+        user_search = username_key.get()
 
         # checks to see if user is passing in their own Account
         if user_search == schedify_user:

@@ -34,18 +34,22 @@
     <br>
     <div class="container">
       <h1>Make a connection!</h1>
-      <form method="post" action="/profile">
+      <form method="get" action="/connections">
         Search for Account<br>
         Enter username:<br>
         <input type="text" name="username_search">
         <input type="submit" value="Go!">
         <br>
       </form>
-      <!-- <ul>
-        {% for friend in friend_list %}
-          <li><a href="/profile">{{friend.first_name}}</a></li>
+      <ul>
+        {% for search in search_list %}
+          <p>{{search.first_name}} {{search.last_name}}</p>
+          <form class="" action="/profile" method="post">
+            <input type="hidden" name="username_searchid" value="{{search.key.id()}}">
+            <input type="submit" name="" value="Go">
+          </form>
         {% endfor %}
-      </ul> -->
+      </ul>
 
     <div class="requests">
       <h1>Requests:</h1>
