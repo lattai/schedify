@@ -17,29 +17,23 @@ const resetview = document.querySelector("#resetScheduleView")
 yourWeek.style.height = "0px"
 theirWeek.style.height = "0px"
 
-compare1.addEventListener("click",e =>{
-  console.log("clicked!")
-  fullSched.style.height = "0px"
-  fullSched.style.width = "0px"
-  yourWeek.style.height = "300px"
-  theirWeek.style.height = "300px"
-  console.log("week height: "+ yourWeek.style.height)
-})
-compare2.addEventListener("click",e =>{
-  console.log("clicked!")
-  fullSched.style.height = "0px"
-  fullSched.style.width = "0px"
-  yourWeek.style.height = "300px"
-  theirWeek.style.height = "300px"
+const compareThings = document.querySelectorAll(".compareAnchor")
+compareThings.forEach(function(anchor){
+  anchor.addEventListener("click",e =>{
+    console.log("clicked!")
+    fullSched.style.height = "0px"
+    fullSched.style.width = "0px"
+    yourWeek.style.height = "300px"
+    theirWeek.style.height = "300px"
+    let email = anchor.id
+    theirWeek.src="https://calendar.google.com/calendar/embed?src="+email+"&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0"
+    theirWeek.style.bgcolor= "#e0ffe0"
+    theirWeek.mode = "Week"
 
-})
-compare3.addEventListener("click",e =>{
-  console.log("clicked!")
-  fullSched.style.height = "0px"
-  fullSched.style.width = "0px"
-  yourWeek.style.height = "300px"
-  theirWeek.style.height = "300px"
-})
+
+
+  });
+});
 resetview.addEventListener("click",e =>{
   console.log("clicked!")
   fullSched.style.height = "600px"
