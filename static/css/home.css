@@ -12,6 +12,9 @@ html {
   text-align: center;
   font-size: 50px;
 }
+img {
+  padding-top: 4px;
+}
 #compare_button {
   padding-top: 1%;
   padding-right: 59.5%;

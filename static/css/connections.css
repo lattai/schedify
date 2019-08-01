@@ -1,6 +1,9 @@
 html {
    background-color: #e0ffe0;
    }
+img {
+   padding-top: 4px;
+   }
 /* body {
    max-width: 500px;
    margin: auto;
