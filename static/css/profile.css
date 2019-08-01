@@ -3,8 +3,8 @@ html {
    }
 #profile_page {
   margin: 0;
-  padding-bottom: 80px;
-  padding-top: 80px;
+  padding-bottom: 40px;
+  padding-top: 40px;
   background: #222;
   font-family: monaco;
   color: white;
@@ -12,6 +12,18 @@ html {
   text-align: center;
   font-size: 50px;
 }
+#user_info {
+  text-align: center;
+  border-style: solid;
+  margin: 4% 20% 0% 20%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 2.4%;
+}
+/* #user_picture {
+  position: fixed;
+  left: 25%;
+} */
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
 margin: 0;
