@@ -40,27 +40,30 @@
       <button onclick="closeRightMenu()" class="rMenuButtonClose">Close &times;</button>
       <a id ="resetScheduleView"href="" class="sidebarbutton">Your Month</a>
 
-      {% for friend_key in friend_list %}
-        {% set friend = friend_key.get() %}
-        {% set currentEmail = friend.email%}
-        {% set index = loop.index%}
-        {% set friendIndex = index%}
-        {% set list1 = currentEmail.split('@') %}
-        <a id= "compare{{index}}" href="#{{index}}" class="sidebarbutton">{{friend.first_name}} {{friend.last_name}}</a>
-      {% endfor %}
-    </div>
-    <br>
+        {% for friend_key in friend_list %}
+          {% set friend = friend_key.get() %}
+          {% set currentEmail = friend.email%}
+          {% set index = loop.index%}
+          {% set friendIndex = index%}
+          {% set list1 = currentEmail.split('@') %}
+          {% set friendEmailStart = list1[0] %}
+          <a id= "{{friend.email}}" class="compareAnchor" href="#{{index}}" class="sidebarbutton">,     {{friend.first_name}} {{friend.last_name}}</a>
 
-    <iframe id="your-month"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="600" frameborder="0" scrolling="no"></iframe>
+          {% endfor %}
+            </div>
+            <br>
 
-  </div>
-  <div class="compare">
-    <iframe id="your-week" src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
-    <!-- your schedule ^^^ -->
+            <iframe id="your-month"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="600" frameborder="0" scrolling="no"></iframe>
+          </div>
+          <div class="compare">
+            <iframe id="your-week" src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
+            <br><br><br>
+          {% if True %}
 
-    <br><br>{{friendIndex}}<br>
-    <iframe id="their-week"src="https://calendar.google.com/calendar/embed?src={{emailStart}}%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
-    <br><br><br>
+            <iframe id="their-week"src="https://calendar.google.com/calendar/embed?src=schedifyTeam%40gmail.com&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0" style="border: 0" width="1014" height="300" frameborder="0" scrolling="no"></iframe>
+            <br><br><br>
+            {% endif %}
+      <br><br><br>
 
     <!-- Friend's Schedule ^^^ -->
   </div>
