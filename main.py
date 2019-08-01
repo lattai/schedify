@@ -1,6 +1,7 @@
 import webapp2
 import os
 import jinja2
+from google.appengine.ext import ndb
 from google.appengine.api import users
 from models import SchedifyUser, Connect, Event, Attendance
 
@@ -249,11 +250,17 @@ class ConnectionsHandler(webapp2.RequestHandler):
         connections_template = the_jinja_env.get_template('templates/connections.html')
         resolve_request = self.request.get('request_answer')
         if resolve_request == "Accept":
-            requester = self.request.get('request_user')
-            schedify_user.add_friend(requester)
+            requester_id = self.request.get('request_userid')
+            requester_key = ndb.Key("SchedifyUser", int(requester_id))
+            requester = requester_key.get()
+
+            schedify_user.add_friend(requester_key)
+            schedify_user.remove_request(requester_key)
             requester.add_friend(schedify_user.key)
         elif resolve_request == "Decline":
-            schedify_user.remove_request(requester)
+            requester_id = self.request.get('request_userid')
+            requester_key = ndb.Key("SchedifyUser", int(requester_id))
+            schedify_user.remove_request(requester_key)
         connections_data = {
             "friend_list": schedify_user.friends,
             "requestkey_list": schedify_user.requests
