@@ -7,6 +7,10 @@
  margin: auto;
  }
 
+ img {
+   padding-top: 4px;
+ }
+
  #eventlist{
   /* width: 450px;
   height: 300px;
