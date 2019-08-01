@@ -18,8 +18,8 @@
 
   #events_header {
    margin: 0;
-   padding-bottom: 80px;
-   padding-top: 80px;
+   padding-bottom: 40px;
+   padding-top: 40px;
    background: #222;
    font-family: monaco;
    color: white;
@@ -40,6 +40,15 @@
  #line2 {
        bottom: 0;
      }
+
+#paragraph_text {
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 4%;
+}
+#title_text {
+  padding-top: 3%;
+}
   html {
      background-color: #e0ffe0;
      }
@@ -129,6 +138,11 @@ nav a::before {
 
 nav a:hover::before {
   width: 100%;
+}
+
+.row {
+  border-style: solid;
+  margin-bottom: 10%;
 }
 
 
