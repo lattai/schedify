@@ -58,6 +58,10 @@
         {% set owner = event.owner.get() %}
         <p>Owner: {{owner.username}}</p>
         <p id="paragraph_text">Summary: {{event.summary}}</p>
+        <form class="" action=/event method="post">
+          <input type="hidden" name="event_searchid" value={{event.key.id()}}>
+          <input type="submit" name="" value="Go">
+        </form>
     </div>
   {% endfor %}
   </div>

@@ -178,11 +178,18 @@ class EventFeedHandler(webapp2.RequestHandler):
         self.response.write(event_template.render(event_data))
 
 class EventHandler(webapp2.RequestHandler):
-    def get(self):
+    def post(self):
         event_template = the_jinja_env.get_template('templates/event.html')
 
-        event_data = {
+        event_searched_id = self.request.get('event_searchid')
+        event_key = ndb.Key("Event", int(event_searched_id))
+        event_searched = event_key.get()
+        owner_event = event_searched.owner.get().first_name
 
+        event_data = {
+            "event_title": event_searched.title,
+            "owner_name": owner_event,
+            "event_description": event_searched.summary
         }
 
         self.response.write(event_template.render(event_data))
