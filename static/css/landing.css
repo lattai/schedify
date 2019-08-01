@@ -3,7 +3,10 @@ html {
    }
 #image {
     text-align: center;
-    border-style: dotted;
+    position: fixed;
+    top: 28%;
+    right: 55%;
+
 }
 #greeting {
   margin: 0;
@@ -15,6 +18,18 @@ html {
   text-shadow: 2px 2px black;
   text-align: center;
   font-size: 50px;
+}
+.mission_lines {
+  font-size: 20px;
+}
+#mission_statement {
+  position: fixed;
+  left: 50%;
+  top: 45%;
+  border-style: solid;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-bottom: 2%;
 }
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
