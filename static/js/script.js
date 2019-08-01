@@ -25,13 +25,13 @@ compareThings.forEach(function(anchor){
     fullSched.style.width = "0px"
     yourWeek.style.height = "300px"
     theirWeek.style.height = "300px"
+    theirWeek.style="border: 0"
+    theirWeek.style.frameborder="0"
+    theirWeek.style.scrolling="no"
+    theirWeek.style.bgcolor = "#e0ffe0"
     let email = anchor.id
-    theirWeek.src="https://calendar.google.com/calendar/embed?src="+email+"&ctz=America%2FNew_York &amp;mode=WEEK&amp;bgcolor=%23e0ffe0"
-    theirWeek.style.bgcolor= "#e0ffe0"
-    theirWeek.mode = "Week"
-
-
-
+    theirWeek.src="https://calendar.google.com/calendar/embed?src="+email+"&ctz=America%2FNew_York&mode=WEEK&bgcolor=%23e0ffe0"
+    console.log(theirWeek.src)
   });
 });
 resetview.addEventListener("click",e =>{
