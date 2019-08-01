@@ -57,7 +57,7 @@
           <form class="" action="/connections" method="post">
             <input type="submit" name="request_answer" value="Accept">
             <input type="submit" name="request_answer" value="Decline">
-            <input type="hidden" name="request_user" value={{request_key}}>
+            <input type="hidden" name="request_userid" value={{request_key.id()}}>
           </form>
         </div>
       {% endfor %}
