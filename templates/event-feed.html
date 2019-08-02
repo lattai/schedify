@@ -93,14 +93,14 @@
         <form class="" action=/event-feed method="post">
           <input type="hidden" name="event_searchid" value={{event.key.id()}}>
           {% if user_not_attending == "true" %}
-            <input type="submit" name="attendance" value="Will be attending">
+            <input type="submit" name="attendance" value="Will Be Attending">
 
           {% elif user_attending == "true" %}
-            <input type="submit" name="attendance" value="Will no longer attend">
+            <input type="submit" name="attendance" value="Will No Longer Attend">
 
           {% else %}
             <input type="submit" name="attendance" value="Attending">
-            <input type="submit" name="attendance" value="Will not attend">
+            <input type="submit" name="attendance" value="Will Not Attend">
 
           {% endif %}
           <p>{{answer}}</p>

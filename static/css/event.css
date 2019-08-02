@@ -1,6 +1,10 @@
 html {
    background-color: #e0ffe0;
    }
+.row {
+  padding-left: 2%;
+  padding-bottom: 1%;
+}
 #events_header {
   margin: 0;
   padding-bottom: 40px;
