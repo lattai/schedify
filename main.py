@@ -531,6 +531,8 @@ class SettingHandler(webapp2.RequestHandler):
         new_last = self.request.get('new_last_name')
         new_bio = self.request.get('new_bio')
 
+
+
         user_profile.update_profile(new_user,new_first,new_last,new_bio)
 
 
@@ -539,6 +541,23 @@ class SettingHandler(webapp2.RequestHandler):
             "user": user_profile,
         }
         self.response.write(profile_template.render(setting_data))
+
+class DeleteHandler(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        email_address = user.nickname()
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+
+        delete_response = self.request.get('delete_user')
+        if delete_response == "Delete user":
+            schedify_user.key.delete()
+
+        delete_data = {
+            "user": schedify_user,
+        }
+
+        logout_template = the_jinja_env.get_template('templates/log-out.html')
+        self.response.write(logout_template.render(delete_data))
 
 app = webapp2.WSGIApplication([
     ('/', LandingHandler),
@@ -550,6 +569,7 @@ app = webapp2.WSGIApplication([
     ('/event_setting', EventSettingHandler),
     ('/connections', ConnectionsHandler),
     ('/setting', SettingHandler),
-    ('/profile', ProfileHandler)
+    ('/profile', ProfileHandler),
+    ('/delete', DeleteHandler),
 
 ], debug=True)
