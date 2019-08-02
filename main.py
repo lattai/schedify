@@ -547,11 +547,17 @@ class DeleteHandler(webapp2.RequestHandler):
         user = users.get_current_user()
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
-        
+
         delete_response = self.request.get('delete_user')
         if delete_response == "Delete user":
             schedify_user.key.delete()
-        self.response.write("user was deleted")
+
+        delete_data = {
+            "user": schedify_user,
+        }
+
+        logout_template = the_jinja_env.get_template('templates/log-out.html')
+        self.response.write(logout_template.render())
 
 app = webapp2.WSGIApplication([
     ('/', LandingHandler),

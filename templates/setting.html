@@ -35,8 +35,10 @@
           Add bio:<br>
           <input type="text" name="new_bio" value="{{user.bio}}">
           <br>
+          <br>
           <input type="submit" name="" value="Add">
         </form>
+        <br>
         <form class="" action="/delete" method="get">
           <input type="hidden" name="user_id" value="{{user.key.id()}}">
           <input type="submit" name="delete_user" value="Delete user">
