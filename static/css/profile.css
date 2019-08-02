@@ -18,6 +18,9 @@ html {
 #settings_button {
   text-align: center;
 }
+#anchor_id {
+  text-decoration:  none;
+}
 #user_info {
   text-align: center;
   border-style: solid;
