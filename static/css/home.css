@@ -19,6 +19,9 @@ img {
   padding-top: 1%;
   padding-right: 65%;
 }
+#compare_connections {
+    text-decoration:  none;
+}
 #calendar-div {
     text-align: center;
     border-style: solid;

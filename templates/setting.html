@@ -3,12 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title>Setting</title>
+    <link rel="stylesheet" href="static/css/setting.css">
   </head>
   <body>
+    <header>
+      <div class="container">
+        <a href = "https://schedify.appspot.com">
+      <img src="static/images/logo.png" alt="Schedify Logo" style="height:70px;">
+       </a>
+        <nav>
+        </nav>
+      </div>
+    </header>
     <form class="" action="/profile" method="get">
-      <input type="submit" name="" value="Go back">
+      <input type="submit" name="" value="Go back" id="go_back">
     </form>
 
+<div id="tamakikotatsu_isbestgirl">
     <form class="" action="/setting" method="post">
       <input type="hidden" name="user_id" value="{{user.key.id()}}">
       Change username:<br>
@@ -25,5 +36,6 @@
       <br>
       <input type="submit" name="" value="Add">
     </form>
+</div>
   </body>
 </html>

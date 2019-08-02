@@ -22,6 +22,9 @@ html {
   /* margin: 0 auto; */
   padding-top: 3%;
 }
+#back_button {
+  text-decoration:  none;
+}
 #go_back {
   padding-left: 27%;
   padding-top: 3%;
