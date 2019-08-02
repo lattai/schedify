@@ -30,7 +30,7 @@ compareThings.forEach(function(anchor){
     theirWeek.style.scrolling="no"
     theirWeek.style.bgcolor = "#e0ffe0"
     let email = anchor.id
-    theirWeek.src="https://calendar.google.com/calendar/embed?src="+email+"&ctz=America%2FNew_York&mode=WEEK&bgcolor=%23e0ffe0"
+    theirWeek.src="https://calendar.google.com/calendar/embed?src="+email+"@gmail.com&ctz=America%2FNew_York&mode=WEEK&bgcolor=%23e0ffe0"
     console.log(theirWeek.src)
   });
 });

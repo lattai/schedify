@@ -2,9 +2,21 @@ html {
    background-color: #e0ffe0;
    }
 
+#settings_header {
+  margin: 0;
+  padding-bottom: 40px;
+  padding-top: 40px;
+  background: #222;
+  font-family: monaco;
+  color: white;
+  text-shadow: 2px 2px black;
+  text-align: center;
+  font-size: 50px;
+}
+
    #go_back {
      margin-left: 32%;
-     margin-top: 12%;
+     margin-top: 5%;
    }
    @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
    body {
