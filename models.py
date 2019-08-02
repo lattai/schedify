@@ -55,6 +55,23 @@ class Event(ndb.Model):
     attending = ndb.KeyProperty(SchedifyUser, repeated=True)
     not_attending = ndb.KeyProperty(SchedifyUser, repeated=True)
 
+    def add_attending(self, key):
+        self.attending.append(key)
+        self.put()
+
+    def remove_attending(self, key):
+        self.attending.remove(key)
+        self.put()
+
+    def add_not_attending(self, key):
+        self.not_attending.append(key)
+        self.put()
+
+    def remove_not_attending(self, key):
+        self.not_attending.remove(key)
+        self.put()
+
+
 
 # do not even need
 class Attendance(ndb.Model):

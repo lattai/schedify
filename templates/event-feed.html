@@ -58,9 +58,29 @@
         {% set owner = event.owner.get() %}
         <p>Owner: {{owner.username}}</p>
         <p id="paragraph_text">Summary: {{event.summary}}</p>
+
+        <!-- go to event button -->
         <form class="" action=/event method="post">
           <input type="hidden" name="event_searchid" value={{event.key.id()}}>
           <input type="submit" name="" value="Go">
+        </form>
+
+        <!-- attending buttons -->
+        
+        <form class="" action=/event-feed method="post">
+          <input type="hidden" name="event_searchid" value={{event.key.id()}}>
+          {% if answer == "none" %}
+            <input type="submit" name="attendance" value="Attending">
+            <input type="submit" name="attendance" value="Will not attend">
+
+
+          {% elif answer == "yes" %}
+            <input type="submit" name="attendance" value="Will no longer attend">
+
+          {% elif answer == "no" %}
+            <input type="submit" name="attendance" value="Will be attending">
+          {% endif %}
+          <p>{{answer}}</p>
         </form>
     </div>
   {% endfor %}

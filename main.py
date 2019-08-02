@@ -1,6 +1,8 @@
 import webapp2
 import os
 import jinja2
+import logging
+
 from google.appengine.ext import ndb
 from google.appengine.api import users
 from models import SchedifyUser, Connect, Event, Attendance
@@ -121,11 +123,15 @@ class EventFeedHandler(webapp2.RequestHandler):
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
 
+        # attending variables
+        attendance_value = "none"
+        response = self.request.get('event-type')
+
         user = users.get_current_user()
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
 
-        event_ownership = self.request.get('event-type')
+        event_ownership = self.request.get('attendance')
 
 
         friends_key_list = schedify_user.friends
@@ -139,18 +145,39 @@ class EventFeedHandler(webapp2.RequestHandler):
 
         event_template = the_jinja_env.get_template('templates/event-feed.html')
 
+        if response == "Attending":
+            event_searched.add_attending(schedify_user.key)
+            attendance_value == "yes"
+        elif response == "Will not attend":
+            event_searched.add_not_attending(schedify_user.key)
+            attendance_value == "no"
+        elif response == "Will no longer attend":
+            event_searched.add_not_attending(schedify_user.key)
+            event_searched.remove_attending(schedify_user.key)
+            attendance_value == "no"
+        elif response == "Will be attending":
+            event_searched.add_attending(schedify_user.key)
+            event_searched.remove_not_attending(schedify_user.key)
+            attendance_value == "yes"
+
         event_data = {
-            # "newevent_url": new_event,
-            "event_info": event_list
+            "event_info": event_list,
+            "answer": attendance_value,
+
         }
         self.response.write(event_template.render(event_data))
 
     def post(self):
+        #  user info
         user = users.get_current_user()
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
 
         event_ownership = self.request.get('event-type')
+
+        # event info
+        attendance_value = "none"
+        response = self.request.get('attendance')
 
         if event_ownership == "self":
             event_list = Event.query(Event.owner == schedify_user.key).fetch()
@@ -160,7 +187,7 @@ class EventFeedHandler(webapp2.RequestHandler):
             for friend_key in friends_key_list:
                 events = Event.query(Event.owner == friend_key).fetch()
                 event_list.extend(events)
-        elif event_ownership == "all":
+        else:
             friends_key_list = schedify_user.friends
             users_key = [schedify_user.key]
             users_key.extend(friends_key_list)
@@ -170,10 +197,47 @@ class EventFeedHandler(webapp2.RequestHandler):
                 events = Event.query(Event.owner == user_key).fetch()
                 event_list.extend(events)
 
+
+        if response == "Attending":
+            #  event information
+            event_searched_id = self.request.get('event_searchid')
+            event_key = ndb.Key("Event", int(event_searched_id))
+            event_searched = event_key.get()
+
+            event_searched.add_attending(schedify_user.key)
+            attendance_value = "yes"
+        elif response == "Will not attend":
+            #  event information
+            event_searched_id = self.request.get('event_searchid')
+            event_key = ndb.Key("Event", int(event_searched_id))
+            event_searched = event_key.get()
+
+            event_searched.add_not_attending(schedify_user.key)
+            attendance_value = "no"
+        elif response == "Will no longer attend":
+            #  event information
+            event_searched_id = self.request.get('event_searchid')
+            event_key = ndb.Key("Event", int(event_searched_id))
+            event_searched = event_key.get()
+
+            event_searched.add_not_attending(schedify_user.key)
+            event_searched.remove_attending(schedify_user.key)
+            attendance_value = "no"
+        elif response == "Will be attending":
+            #  event information
+            event_searched_id = self.request.get('event_searchid')
+            event_key = ndb.Key("Event", int(event_searched_id))
+            event_searched = event_key.get()
+
+            event_searched.add_attending(schedify_user.key)
+            event_searched.remove_not_attending(schedify_user.key)
+            attendance_value = "yes"
+
         event_template = the_jinja_env.get_template('templates/event-feed.html')
 
         event_data = {
-            "event_info": event_list
+            "event_info": event_list,
+            "answer": attendance_value,
         }
         self.response.write(event_template.render(event_data))
 
@@ -182,6 +246,7 @@ class EventHandler(webapp2.RequestHandler):
         event_template = the_jinja_env.get_template('templates/event.html')
 
         event_searched_id = self.request.get('event_searchid')
+        # logging.log(Level.INFO, "event_searchid = " + event_searched_id)
         event_key = ndb.Key("Event", int(event_searched_id))
         event_searched = event_key.get()
         owner_event = event_searched.owner.get().first_name
@@ -189,7 +254,9 @@ class EventHandler(webapp2.RequestHandler):
         event_data = {
             "event_title": event_searched.title,
             "owner_name": owner_event,
-            "event_description": event_searched.summary
+            "event_description": event_searched.summary,
+            "attendingkey_list": event_searched.attending,
+            "abesntkey_list": event_searched.not_attending
         }
 
         self.response.write(event_template.render(event_data))
