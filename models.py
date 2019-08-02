@@ -6,9 +6,17 @@ class SchedifyUser(ndb.Model):
     first_name = ndb.StringProperty()
     last_name = ndb.StringProperty()
     username = ndb.StringProperty()
+    bio = ndb.StringProperty()
     email = ndb.StringProperty()
     friends = ndb.KeyProperty(kind="SchedifyUser", repeated=True)
     requests = ndb.KeyProperty(kind="SchedifyUser", repeated=True)
+
+    def update_profile(self,new_username,new_firstname,new_lastname,new_bio):
+        self.username = new_username
+        self.first_name = new_firstname
+        self.last_name = new_lastname
+        self.bio = new_bio
+        self.put()
 
     def add_request(self, key):
         self.requests.append(key)

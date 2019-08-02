@@ -27,7 +27,7 @@
   <!-- <img src="https://png.pngtree.com/svg/20170602/user_circle_1048392.png" alt="profile picture" height="120px"> -->
 </div>
 <div id="user_info">
-    <h1>{{user_name}}</h1>
+    <h1>{{user_instance.username}}</h1>
     <!-- displays user profile -->
     <!-- {% if account == "self" %}
       <button type="button" name="button">
@@ -57,19 +57,20 @@
         <input type="hidden" name="username_search" value={{user_name}}>
       </form>
     {% endif %}
-    <h5>{{first_name}} {{last_name}}</h5>
+    <h5>{{user_instance.first_name}} {{user_instance.last_name}}</h5>
     <div class="bio">
-      <p>Biography of person</p>
+      <p>"{{user_instance.bio}}"</p>
     </div>
 </div>
 <br>
 <br>
 {% if account == "self" %}
 <div id="settings_button">
-  <form class="" action="/setting" method="post">
-    <input type="hidden" name="user_id" value="{{user_id}}">
+  <form class="" action="/setting" method="get">
+    <input type="hidden" name="user_id" value="{{user_instance.key.id()}}">
     <input type="submit" name="" value="Setting">
   </form>
+  <button href="{{sign_out}}" type="button" name="button">Sign out</button>
 </div>
 {% endif %}
   </body>

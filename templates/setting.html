@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Setting</title>
+  </head>
+  <body>
+    <form class="" action="/profile" method="get">
+      <input type="submit" name="" value="Go back">
+    </form>
+
+    <form class="" action="/setting" method="post">
+      <input type="hidden" name="user_id" value="{{user.key.id()}}">
+      Change username:<br>
+      <input type="text" name="new_username" value="{{user.username}}">
+      <br>
+      Change first name:<br>
+      <input type="text" name="new_first_name" value="{{user.first_name}}">
+      <br>
+      Change last name:<br>
+      <input type="text" name="new_last_name" value="{{user.last_name}}">
+      <br>
+      Add bio:<br>
+      <input type="text" name="new_bio" value="{{user.bio}}">
+      <br>
+      <input type="submit" name="" value="Add">
+    </form>
+  </body>
+</html>

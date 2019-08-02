@@ -84,6 +84,7 @@ class LandingHandler(webapp2.RequestHandler):
         last_name = lastname,
         username = username,
         friends = [],
+        bio = None,
         email=user.nickname())
         #email=self.request.get('email')) because i want to parse their email to get their cal
     schedify_user.put()
@@ -354,12 +355,12 @@ class ProfileHandler(webapp2.RequestHandler):
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
 
+        logout_url = users.create_logout_url('/')
+
         profile_data = {
-            "user_id": schedify_user.key.id(),
-            "user_name": schedify_user.username,
-            "first_name": schedify_user.first_name,
-            "last_name": schedify_user.last_name,
-            "account": "self"
+            "user_instance": schedify_user,
+            "account": "self",
+            "sign_out": logout_url
         }
         self.response.write(profile_template.render(profile_data))
 
@@ -413,20 +414,43 @@ class ProfileHandler(webapp2.RequestHandler):
 
 
         profile_data = {
-            "user_name": user_search.username,
-            "first_name": user_search.first_name,
-            "last_name": user_search.last_name,
+            "user_instance": user_search,
             "friend_status": friend_status,
             "request_status": request_status,
             "account": account_status,
             "search_id": username_id,
-            "user_key": schedify_user.key
         }
         self.response.write(profile_template.render(profile_data))
 
 class SettingHandler(webapp2.RequestHandler):
+    def get(self):
+        user_id = self.request.get('user_id')
+        user_key = ndb.Key("SchedifyUser", int(user_id))
+        user_profile = user_key.get()
+
+        profile_template = the_jinja_env.get_template('templates/setting.html')
+        setting_data = {
+            "user": user_profile,
+        }
+        self.response.write(profile_template.render(setting_data))
     def post(self):
-        profile_template = the_jinja_env.get_template('templates/profile.html')
+        user_id = self.request.get('user_id')
+        user_key = ndb.Key("SchedifyUser", int(user_id))
+        user_profile = user_key.get()
+
+        new_user = self.request.get('new_username')
+        new_first = self.request.get('new_first_name')
+        new_last = self.request.get('new_last_name')
+        new_bio = self.request.get('new_bio')
+
+        user_profile.update_profile(new_user,new_first,new_last,new_bio)
+
+
+        profile_template = the_jinja_env.get_template('templates/setting.html')
+        setting_data = {
+            "user": user_profile,
+        }
+        self.response.write(profile_template.render(setting_data))
 
 app = webapp2.WSGIApplication([
     ('/', LandingHandler),
