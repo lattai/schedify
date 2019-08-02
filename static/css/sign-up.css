@@ -17,6 +17,10 @@ html {
   padding-top: 5%;
   text-align: center;
 }
+img {
+  padding-top: 4px;
+  margin-right: 80%;
+}
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
 margin: 0;
