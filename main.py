@@ -557,7 +557,7 @@ class DeleteHandler(webapp2.RequestHandler):
         }
 
         logout_template = the_jinja_env.get_template('templates/log-out.html')
-        self.response.write(logout_template.render())
+        self.response.write(logout_template.render(delete_data))
 
 app = webapp2.WSGIApplication([
     ('/', LandingHandler),
