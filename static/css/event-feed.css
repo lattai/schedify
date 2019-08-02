@@ -20,6 +20,10 @@
   margin: auto;
   }
 
+#create_event {
+    text-decoration:  none;
+}
+
   #events_header {
    margin: 0;
    padding-bottom: 40px;
