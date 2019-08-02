@@ -146,6 +146,30 @@ class EventFeedHandler(webapp2.RequestHandler):
 
         event_template = the_jinja_env.get_template('templates/event-feed.html')
 
+
+        # creates a list is user is attending or not
+        user_attending_status = []
+        for event in event_list:
+            user_status = "neither"
+            atendees_key_list = event.attending
+            absentee_key_list = event.not_attending
+            logging.log(logging.INFO, "atendee: " + str(atendees_key_list))
+            logging.log(logging.INFO, "absentee: " + str(absentee_key_list))
+
+            for atendee_key in atendees_key_list:
+                if atendee_key == schedify_user.key:
+                    user_status = "yes"
+                    break
+
+            for absentee_key in absentee_key_list:
+                if absentee_key == schedify_user.key:
+                    user_status = "no"
+                    break
+
+            user_attending_status.append(user_status)
+
+        logging.log(logging.INFO, user_attending_status)
+
         if response == "Attending":
             event_searched.add_attending(schedify_user.key)
             attendance_value == "yes"
@@ -164,7 +188,8 @@ class EventFeedHandler(webapp2.RequestHandler):
         event_data = {
             "event_info": event_list,
             "answer": attendance_value,
-            "user_key": schedify_user.key
+            "user_key": schedify_user.key,
+            "attending_list": user_attending_status
 
         }
         self.response.write(event_template.render(event_data))
@@ -199,7 +224,7 @@ class EventFeedHandler(webapp2.RequestHandler):
                 events = Event.query(Event.owner == user_key).fetch()
                 event_list.extend(events)
 
-
+        # checks to see which button was pressed
         if response == "Attending":
             #  event information
             event_searched_id = self.request.get('event_searchid')
@@ -207,7 +232,6 @@ class EventFeedHandler(webapp2.RequestHandler):
             event_searched = event_key.get()
 
             event_searched.add_attending(schedify_user.key)
-            attendance_value = "yes"
         elif response == "Will not attend":
             #  event information
             event_searched_id = self.request.get('event_searchid')
@@ -215,7 +239,6 @@ class EventFeedHandler(webapp2.RequestHandler):
             event_searched = event_key.get()
 
             event_searched.add_not_attending(schedify_user.key)
-            attendance_value = "no"
         elif response == "Will no longer attend":
             #  event information
             event_searched_id = self.request.get('event_searchid')
@@ -224,7 +247,6 @@ class EventFeedHandler(webapp2.RequestHandler):
 
             event_searched.add_not_attending(schedify_user.key)
             event_searched.remove_attending(schedify_user.key)
-            attendance_value = "no"
         elif response == "Will be attending":
             #  event information
             event_searched_id = self.request.get('event_searchid')
@@ -233,14 +255,35 @@ class EventFeedHandler(webapp2.RequestHandler):
 
             event_searched.add_attending(schedify_user.key)
             event_searched.remove_not_attending(schedify_user.key)
-            attendance_value = "yes"
+
+        # creates a list is user is attending or not
+        user_attending_status = []
+        for event in event_list:
+            user_status = "neither"
+            atendees_key_list = event.attending
+            absentee_key_list = event.not_attending
+            logging.log(logging.INFO, "atendee: " + str(atendees_key_list))
+            logging.log(logging.INFO, "absentee: " + str(absentee_key_list))
+
+            for atendee_key in atendees_key_list:
+                if atendee_key == schedify_user.key:
+                    user_status = "yes"
+                    break
+
+            for absentee_key in absentee_key_list:
+                if absentee_key == schedify_user.key:
+                    user_status = "no"
+                    break
+
+            user_attending_status.append(user_status)
 
         event_template = the_jinja_env.get_template('templates/event-feed.html')
 
         event_data = {
             "event_info": event_list,
             "answer": attendance_value,
-            "user_key": schedify_user.key
+            "user_key": schedify_user.key,
+            "attending_list": user_attending_status
         }
         self.response.write(event_template.render(event_data))
 
@@ -259,7 +302,7 @@ class EventHandler(webapp2.RequestHandler):
             "owner_name": owner_event,
             "event_description": event_searched.summary,
             "attendingkey_list": event_searched.attending,
-            "abesntkey_list": event_searched.not_attending
+            "abesntkey_list": event_searched.not_attending,
         }
 
         self.response.write(event_template.render(event_data))
