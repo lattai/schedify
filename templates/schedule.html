@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Your Schedule</title>
+<title>My Calendar</title>
 <link rel="stylesheet" href="../static/css/schedule.css">
 <head>
 
@@ -11,7 +11,9 @@
 
   <header>
     <div class="container">
-      <h5 class="logo">Schedify</h5>
+      <a href = "https://schedify.appspot.com">
+    <img src="static/images/logo.png" alt="Schedify Logo" style="height:70px;">
+     </a>
       <nav>
         <ul>
           <li><a href="/">Home</a></li>
@@ -31,11 +33,9 @@
 
 <div id="body">
   <div class="yourSchedule">
-    <h1>Your Schedule</h1>
     <div id="rMenuButton">
     <button class="rMenuButton" onclick="openRightMenu()">Choose a Connection</button>
   </div>
-
     <div class="rMenuButtonOpened" style="display:none;right:0;" id="rightMenu">
       <button onclick="closeRightMenu()" class="rMenuButtonClose">Close &times;</button>
       <a id ="resetScheduleView"href="" class="sidebarbutton">Your Month</a>

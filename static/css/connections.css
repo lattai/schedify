@@ -1,14 +1,17 @@
 html {
    background-color: #e0ffe0;
    }
+img {
+   padding-top: 4px;
+   }
 /* body {
    max-width: 500px;
    margin: auto;
    } */
 #connections_page {
   margin: 0;
-  padding-bottom: 80px;
-  padding-top: 80px;
+  padding-bottom: 40px;
+  padding-top: 40px;
   background: #222;
   font-family: monaco;
   color: white;
@@ -95,7 +98,7 @@ html {
     }
 
 #connections {
-  margin: 5%;
+  margin: 3%;
   border: 3px solid black;
   padding-bottom: 1%;
 }

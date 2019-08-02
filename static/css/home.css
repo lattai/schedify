@@ -12,6 +12,9 @@ html {
   text-align: center;
   font-size: 50px;
 }
+img {
+  padding-top: 4px;
+}
 #compare_button {
   padding-top: 1%;
   padding-right: 59.5%;
@@ -21,7 +24,7 @@ html {
     border-style: solid;
     margin: 4%;
     padding-top: 2%;
-    padding-bottom: 2%;
+    padding-bottom: 3%;
     /* padding-top: 50px; */
  }
 
