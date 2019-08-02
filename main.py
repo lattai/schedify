@@ -163,6 +163,7 @@ class EventFeedHandler(webapp2.RequestHandler):
         event_data = {
             "event_info": event_list,
             "answer": attendance_value,
+            "user_key": schedify_user.key
 
         }
         self.response.write(event_template.render(event_data))
@@ -238,6 +239,7 @@ class EventFeedHandler(webapp2.RequestHandler):
         event_data = {
             "event_info": event_list,
             "answer": attendance_value,
+            "user_key": schedify_user.key
         }
         self.response.write(event_template.render(event_data))
 
@@ -353,6 +355,7 @@ class ProfileHandler(webapp2.RequestHandler):
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
 
         profile_data = {
+            "user_id": schedify_user.key.id(),
             "user_name": schedify_user.username,
             "first_name": schedify_user.first_name,
             "last_name": schedify_user.last_name,
@@ -377,6 +380,7 @@ class ProfileHandler(webapp2.RequestHandler):
             account_status = "self"
             friend_status = None
             request_status = None
+            user_key = None
         else:
             account_status = "other"
             friend_status = self.request.get('friend_status')
@@ -415,10 +419,14 @@ class ProfileHandler(webapp2.RequestHandler):
             "friend_status": friend_status,
             "request_status": request_status,
             "account": account_status,
-            "search_id": username_id
+            "search_id": username_id,
+            "user_key": schedify_user.key
         }
         self.response.write(profile_template.render(profile_data))
 
+class SettingHandler(webapp2.RequestHandler):
+    def post(self):
+        profile_template = the_jinja_env.get_template('templates/profile.html')
 
 app = webapp2.WSGIApplication([
     ('/', LandingHandler),
@@ -428,6 +436,7 @@ app = webapp2.WSGIApplication([
     ('/new_event', NewEventHandler),
     ('/event', EventHandler),
     ('/connections', ConnectionsHandler),
+    ('/setting', SettingHandler),
     ('/profile', ProfileHandler)
 
 ], debug=True)

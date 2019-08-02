@@ -54,6 +54,26 @@
 
 
   {% for event in event_info %}
+
+    <!-- decides which button to present -->
+    {% set user_attending = false %}
+    {% set user_not_attending = false %}
+    {% set atendees_key_list = event.attending %}
+    {% set absentee_key_list = event.not_attending %}
+
+    <!-- checks if user is attending -->
+    {% for atendee_key in atendees_key_list  %}
+      {% if atendee_key == user_key %}
+        {% set user_attending = "true" %}
+      {% endif %}
+    {% endfor %}
+    <!-- checks if user is not attending -->
+    {% for absentee_key in absentee_key_list  %}
+      {% if absentee_key == user_key %}
+        {% set user_not_attending = "true" %}
+      {% endif %}
+    {% endfor %}
+
     <div class=row>
       <div class=img></div>
       <div class=description></div>
@@ -72,16 +92,16 @@
 
         <form class="" action=/event-feed method="post">
           <input type="hidden" name="event_searchid" value={{event.key.id()}}>
-          {% if answer == "none" %}
+          {% if user_not_attending == "true" %}
+            <input type="submit" name="attendance" value="Will be attending">
+
+          {% elif user_attending == "true" %}
+            <input type="submit" name="attendance" value="Will no longer attend">
+
+          {% else %}
             <input type="submit" name="attendance" value="Attending">
             <input type="submit" name="attendance" value="Will not attend">
 
-
-          {% elif answer == "yes" %}
-            <input type="submit" name="attendance" value="Will no longer attend">
-
-          {% elif answer == "no" %}
-            <input type="submit" name="attendance" value="Will be attending">
           {% endif %}
           <p>{{answer}}</p>
         </form>
