@@ -25,7 +25,15 @@
 
     <h1 id="events_header">{{event_title}}</h1>
     <div id="event_text">
-      <h1>{{owner_name}}'s Event:</h1>
+      <h1>{{owner_instance.first_name}}'s Event:</h1>
+
+      <!-- Allows Owner to access event setting -->
+      {% if owner_instance.key == user_instance.key %}
+        <form class="" action="/event_setting" method="get">
+          <input type="hidden" name="event_id" value="{{event_instancekey.id()}}">
+          <input type="submit" name="" value="Settings">
+      {% endif %}    
+      </form>
         <div class=row>
           <div class=img></div>
           <div class=description>

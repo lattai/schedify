@@ -295,11 +295,18 @@ class EventHandler(webapp2.RequestHandler):
         # logging.log(Level.INFO, "event_searchid = " + event_searched_id)
         event_key = ndb.Key("Event", int(event_searched_id))
         event_searched = event_key.get()
-        owner_event = event_searched.owner.get().first_name
+        owner_instance = event_searched.owner.get()
+
+        user = users.get_current_user()
+        email_address = user.nickname()
+        schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
+
 
         event_data = {
+            "event_instancekey": event_key,
             "event_title": event_searched.title,
-            "owner_name": owner_event,
+            "user_instance": schedify_user,
+            "owner_instance": owner_instance,
             "event_description": event_searched.summary,
             "attendingkey_list": event_searched.attending,
             "abesntkey_list": event_searched.not_attending,
@@ -348,6 +355,34 @@ class NewEventHandler(webapp2.RequestHandler):
         #      event = schedify_event,
         # )
         self.response.write(newevent_template.render())
+
+class EventSettingHandler(webapp2.RequestHandler):
+    def get(self):
+        event_id = self.request.get('event_id')
+        event_key = ndb.Key("Event", int(event_id))
+        event_info = event_key.get()
+
+        event_setting_template = the_jinja_env.get_template('templates/event-setting.html')
+        event_setting_data = {
+            "event": event_info,
+        }
+        self.response.write(event_setting_template.render(event_setting_data))
+    def post(self):
+        event_id = self.request.get('event_id')
+        event_key = ndb.Key("Event", int(event_id))
+        event_info = event_key.get()
+
+        new_event_title = self.request.get('new_title')
+        new_event_summary = self.request.get('new_summary')
+
+        event_info.update_event(new_event_title,new_event_summary)
+
+
+        event_setting_template = the_jinja_env.get_template('templates/event-setting.html')
+        event_setting_data = {
+            "event": event_info,
+        }
+        self.response.write(event_setting_template.render(event_setting_data))
 
 class ConnectionsHandler(webapp2.RequestHandler):
     def get(self):
@@ -502,6 +537,7 @@ app = webapp2.WSGIApplication([
     ('/event-feed', EventFeedHandler),
     ('/new_event', NewEventHandler),
     ('/event', EventHandler),
+    ('/event_setting', EventSettingHandler),
     ('/connections', ConnectionsHandler),
     ('/setting', SettingHandler),
     ('/profile', ProfileHandler)

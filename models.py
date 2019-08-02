@@ -79,6 +79,11 @@ class Event(ndb.Model):
         self.not_attending.remove(key)
         self.put()
 
+    def update_event(self,new_title,new_summary):
+        self.title = new_title
+        self.summary = new_summary
+        self.put()
+
 
 
 # do not even need

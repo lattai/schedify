@@ -15,24 +15,18 @@
         </nav>
       </div>
     </header>
-    <form class="" action="/profile" method="get">
+    <form class="" action="/event" method="post">
+      <input type="hidden" name="event_searchid" value="{{event.key.id()}}">
       <input type="submit" name="" value="Go back" id="go_back">
     </form>
-
     <div id="tamakikotatsu_isbestgirl">
-        <form class="" action="/setting" method="post">
-          <input type="hidden" name="user_id" value="{{user.key.id()}}">
-          Change username:<br>
-          <input type="text" name="new_username" value="{{user.username}}">
+        <form class="" action="/event_setting" method="post">
+          <input type="hidden" name="event_id" value="{{event.key.id()}}">
+          Change Title:<br>
+          <input type="text" name="new_title" value="{{event.title}}">
           <br>
-          Change first name:<br>
-          <input type="text" name="new_first_name" value="{{user.first_name}}">
-          <br>
-          Change last name:<br>
-          <input type="text" name="new_last_name" value="{{user.last_name}}">
-          <br>
-          Add bio:<br>
-          <input type="text" name="new_bio" value="{{user.bio}}">
+          Change Summary:<br>
+          <input type="text" name="new_summary" value="{{event.summary}}">
           <br>
           <input type="submit" name="" value="Add">
         </form>
