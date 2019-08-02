@@ -44,7 +44,7 @@
             <li>{{attending_user.first_name}} {{attending_user.last_name}}</li>
           {% endfor %}
 
-          <ul>Not attending:</ul>
+          <ul>Not Attending:</ul>
           {% for absentee_key in abesntkey_list %}
             {% set absentee =  absentee_key.get() %}
             <li>{{absentee.first_name}} {{absentee.last_name}}</li>
