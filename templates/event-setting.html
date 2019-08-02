@@ -28,7 +28,11 @@
           Change Summary:<br>
           <input type="text" name="new_summary" value="{{event.summary}}">
           <br>
-          <input type="submit" name="" value="Add">
+          <input type="submit" name="" value="Update Event">
+        </form>
+        <form class="" action="/event-feed" method="get">
+          <input type="hidden" name="event_id" value="{{event.key.id()}}">
+          <input type="submit" name="delete_event" value="Delete event">
         </form>
     </div>
   </body>

@@ -120,6 +120,15 @@ class ScheduleHandler(webapp2.RequestHandler):
 
 class EventFeedHandler(webapp2.RequestHandler):
     def get(self):
+
+        # if somebody deleted an event...
+        delete_response = self.request.get('delete_event')
+        if delete_response == "Delete event":
+            event_id = self.request.get('event_id')
+            event_key = ndb.Key("Event", int(event_id))
+            event_info = event_key.get()
+            event_info.key.delete()
+
         user = users.get_current_user()
         email_address = user.nickname()
         schedify_user = SchedifyUser.query().filter(SchedifyUser.email == email_address).get()
@@ -374,6 +383,7 @@ class EventSettingHandler(webapp2.RequestHandler):
 
         new_event_title = self.request.get('new_title')
         new_event_summary = self.request.get('new_summary')
+
 
         event_info.update_event(new_event_title,new_event_summary)
 
