@@ -414,7 +414,8 @@ class ProfileHandler(webapp2.RequestHandler):
             "last_name": user_search.last_name,
             "friend_status": friend_status,
             "request_status": request_status,
-            "account": account_status
+            "account": account_status,
+            "search_id": username_id
         }
         self.response.write(profile_template.render(profile_data))
 
