@@ -37,6 +37,10 @@
           <br>
           <input type="submit" name="" value="Add">
         </form>
+        <form class="" action="/delete" method="get">
+          <input type="hidden" name="user_id" value="{{user.key.id()}}">
+          <input type="submit" name="delete_user" value="Delete user">
+        </form>
     </div>
   </body>
 </html>
